@@ -1,0 +1,284 @@
+1,Productos y Otros,NULL
+1747,Accesorios para Vehículos,1
+26399,Accesorios Náuticos,1747
+5732,Accesorios para Carros,1747
+5727,Accesorios para Motos,1747
+17895,Accesorios para Rústicos,1747
+3381,Audio para Carros,1747
+8471,Autoperiquitos,1747
+8561,Herramientas para Carros,1747
+8531,Navegadores GPS,1747
+2232,Otros,1747
+1071,Animales y Mascotas,1
+8592,Alimentación para Animales,1071
+1081,Gatos,1071
+3615,Libros de Animales,1071
+1072,Perros,1071
+1126,Otros Accesorios para Animales,1071
+1384,Bebés,1
+5360,Alimentación para Bebés,1384
+74766,Andaderas,1384
+5373,Artículos de Bebés para Baño,1384
+40402,Canguros y Porta Bebés,1384
+1386,Coches para Bebés,1384
+1388,Corrales, Cunas y Moisés,1384
+1392,Juguetes para Bebés,1384
+8591,Recuerdos y Cotillones de Bebé,1384
+1396,Ropa de Bebé,1384
+1390,Seguridad para Bebés,1384
+1387,Sillas de Bebés para Carros,1384
+40428,Sillas de Bebés para Comer,1384
+1889,Otros,1384
+1051,Celulares y Teléfonos,1
+3813,Accesorios para Celulares,1051
+8359,Adaptadores USB,3813
+4922,Cables de Datos,3813
+72118,BlackBerry,4922
+117190,iPhone,4922
+5306,Motorola,4922
+5305,Nokia,4922
+6303,Samsung,4922
+6290,Sony,4922
+5304,Otras Marcas,4922
+2904,Cargadores,3813
+58322,BlackBerry,2904
+117195,Genéricos,2904
+72126,HTC,2904
+48017,iPhone,2904
+72130,LG,2904
+4163,Motorola,2904
+4164,Nokia,2904
+117194,Power Bank,2904
+4167,Samsung,2904
+4162,Sony,2904
+4165,Otras Marcas,2904
+11860,Cornetas,3813
+5213,Estuches y Forros,3813
+117252,Láminas Protectoras,3813
+39109,Lápices,3813
+5072,Manos Libres,3813
+117251,Memorias MicroSD,3813
+116924,Smartwatch,3813
+4160,Tonos y Software,3813
+4187,Otros,3813
+1055,Celulares y Smartphones,1051
+10616,Centros de Comunicaciones,1051
+1058,Radios - WalkieTalkies,1051
+117272,Repuestos para Celulares,1051
+1053,Telefonía,1051
+1915,Otros,1051
+1798,Coleccionables y Hobbies,1	
+16319,Bolígrafos,1798
+16320,Calcomanías,1798
+16308,Chapas y Pines,1798
+3435,Comics,1798
+3422,Figuras y Muñecos,1798
+1861,Filatelia,1798
+8366,Fotografías,1798
+2314,Latas, Botellas y Afines,1798
+1805,Militaría y Afines,1798
+3407,Modelismo,1798
+1806,Monedas y Billetes Venezolanos,1798
+1807,Postales,1798
+1830,Tarjetas Telefónicas,1798
+111067,Vehículos en Miniatura,1798
+1831,Álbumes y Cromos,1798
+2458,Otros,1798
+1648,Computación,1
+3377,Accesorios para Laptops,1648
+1870,Apple,1648
+2141,Cartuchos, Tintas y Toner,1648
+1691,Componentes de PC,1648
+1649,Computadoras,1648
+9533,Discos Duros y Removibles,1648
+1676,Impresoras y Plotters,1648
+1652,Laptops,1648
+1694,Memorias RAM,1648
+1656,Monitores,1648
+1714,Mouses,1648
+1651,Palms y Pocket PC´s,1648
+5027,Pen Drives,1648
+1712,Periféricos y Accesorios de PC,1648
+1693,Procesadores,1648
+1657,Proyectores y Pantallas,1648
+1670,Quemadoras y Discos Vírgenes,1648
+1709,Redes Inalámbricas,1648
+1700,Redes No Inalámbricas,1648
+8883,Registradoras y Punto de Venta,1648
+1723,Software,1648
+117283,Tablets y Accesorios,1648
+1658,Tarjetas de Video y Captura,1648
+1692,Tarjetas Madre,1648
+1912,Otros,1648
+1144,Consolas y Videojuegos,1
+3778,GameBoy,1144
+4394,GameCube,1144
+92662,Nintendo 3DS,1144
+4395,Nintendo 64,1144
+11050,Nintendo DS,1144
+11223,Nintendo Wii,1144
+116346,Nintendo Wii U,1144
+6004,PlayStation 1,1144
+5998,PlayStation 2 - PS2,1144
+11623,PlayStation 3 - PS3,1144
+116499,PlayStation 4 - PS4,1144
+8735,PlayStation Portable - PSP,1144
+106931,PlayStation Vita - PS Vita,1144
+9826,Xbox,1144
+9959,Xbox 360,1144
+116734,Xbox One,1144
+1152,Otras Consolas,1144
+1039,Cámaras y Accesorios,1
+1049,Accesorios para Cámaras,1039
+2889,Cámaras Convencionales,1039
+1042,Cámaras Digitales,1039
+5215,Memorias Digitales,1039
+4660,Video Cámaras,1039
+1914,Otros,1039
+1276,Deportes y Fitness,1
+1338,Aerobics y Fitness,1276
+2480,Artes Marciales y Boxeo,1276
+1328,Beisbol,1276
+1292,Bicicletas y Ciclismo,1276
+18109,Bowling,1276
+1362,Camping,1276
+1277,Deportes Acuáticos,1276
+3611,Deportes Extremos,1276
+1979,Equipos para Pesca,1276
+1285,Fútbol,1276
+18113,Golf,1276
+4697,Juegos de Salón,1276
+8776,Lentes Deportivos y de Sol,1276
+8843,Morrales, Koalas y Maletines,1276
+8635,Máquinas de Gimnasio,1276
+1293,Patines,1276
+79735,Skate,1276	
+6144,Tenis y Squash,1276
+5479,Zapatos Deportivos,1276
+1358,Otros,1276
+5726,Electrodomésticos,1
+112138,Aires Acondicionados,5726
+1578,Artefactos para el Hogar,5726
+8458,Electrodomésticos de Cocina,5726
+27576,Lavadoras y Secadoras,5726
+1576,Neveras y Congeladores,5726
+1645,Ventiladores,5726
+5977,Otros,5726
+1000,Electrónica, Audio y Video,1
+8886,Accesorios para Audio y Video,1000
+1023,Audio para Carros,1000
+3835,Audio para el Hogar,1000
+8626,Audio Portátil y Radios,1000
+3837,Audio Profesional y DJs,1000
+1060,Calculadoras,1000
+1001,DVDs y Home Theaters,1000
+1941,Fotocopiadoras y Accesorios,1000
+6473,GPS y Accesorios,1000
+8702,iPod,1000
+1012,Reproductores MP3, MP4 y MP5,1000
+2912,Seguridad para el Hogar,1000
+1002,TV - Televisores,1000
+1006,Video Cámaras,1000
+1070,Otros,1000
+1246,Estética y Belleza,1
+1253,Cuidado de la Piel,1246
+1263,Cuidado del Cabello,1246
+29762,Cuidado para Uñas,1246
+8631,Cuidado Personal,1246
+1248,Maquillaje,1246
+1271,Perfumes y Fragancias,1246
+1275,Otros,1246
+1574,Hogar y Muebles,1
+116335,Artículos para Navidad,1574
+1613,Baño,1574
+1618,Cocina,1574
+1631,Decoración,1574
+1608,Dormitorio,1574
+2525,Herramientas para el Hogar,1574
+1582,Iluminación para el Hogar,1574
+8406,Jardín,1574
+3236,Sala y Comedor,1574
+31399,Otros,1574
+1499,Industrias,1
+1500,Construcción,1499
+2467,Energia Eléctrica,1499
+5226,Herramientas,1499
+29758,Industria Alimentaria,1499
+29759,Industria Textil,1499
+8535,Oficinas,1499
+29757,Publicidad y Mercadeo,1499
+8515,Seguridad para Industrias,1499
+8530,Testers y Multímetros,1499
+1893,Otros,1499
+1182,Instrumentos Musicales,1
+8553,Audio Profesional y DJs,8553
+3018,Bajos,8553
+3004,Baterías y Percusión,8553				 
+3012,Efectos de Sonido,8553
+2987,Guitarras,8553
+3005,Instrumentos de Viento,8553
+2997,Teclados y Pianos,8553
+3023,Violines,8553
+7805,Órganos,8553
+3014,Otros,8553	
+1132,Juegos y Juguetes,1
+2978,Figuras y Muñecos,1132
+2960,Juegos,1132
+10813,Juegos al Aire Libre y Agua,1132
+2533,Juguetes,1132
+8370,Juguetes para Bebés,1132
+1841,Modelismo,1132
+2968,Muñecas y Accesorios,1132
+111073,Vehículos en Miniatura,1132
+10811,Vehículos para Niños,1132
+1910,Otros,1132
+3025,Libros, Música y Películas,1
+80266,Afiches de Películas y Libros,3025
+3043,Comics,3025
+7529,E-books,3025
+1196,Libros,3025
+1176,Música y Videos,3025
+1169,Películas,3025
+1955,Revistas,3025
+6217,Series de TV y Telenovelas,3025
+1228,Otros,3025
+3937,Relojes, Joyas y Bisutería,1
+1431,Joyería y Bisutería,3937
+7715,Materiales para Joyería,3937
+1442,Relojes,3937
+3938,Otros,3937
+1430,Ropa, Zapatos y Accesorios,1
+8820,Accesorios de Moda,1430
+116898,Blusas,1430
+116867,Camisas,1430
+26400,Carteras, Morrales y Billetera,1430
+116909,Chaquetas,1430
+116859,Chemises,1430
+3123,Conjuntos para Niños,1430
+24787,Disfraces para Niños,1430
+116862,Faldas,1430
+116883,Franelas,1430
+116845,Jeans,1430
+116856,Pantalones,1430
+116849,Pijamas y Ropa de Dormir,1430
+116864,Ropa Interior,1430
+24621,Ropa para Bebés,1430
+116824,Shorts y Bermudas,1430
+116853,Sweaters,1430
+116841,Trajes de Baño,1430
+116827,Vestidos,1430
+5299,Vestidos de Novia,1430
+5208,Zapatos,1430
+9865,Zapatos Deportivos,1430
+1911,Otros,1430
+1953,Otras Categorías,1
+2818,Adultos,1953
+1367,Arte y Antigüedades,1953
+1403,Bebidas y Alimentos,1953
+1740,Esoterismo,1953
+40433,Eventos y Conciertos,1953
+44011,Recuerdos y Cotillones,1953
+3530,Otros,1953
+2,Servicios,NULL
+3,Inmuebles,NULL
+4,Vehículos,NULL
