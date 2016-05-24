@@ -49,7 +49,7 @@ $habilitado=!isset($_SESSION["id"])?$habilitado="No":$habilitado="Si";
 					<span id="negativos<?php echo $valor["id_r"];?>"><?php echo $valor["totaNegativos"];?></span> Total <span id="total<?php echo $valor["id_r"];?>"><?php echo $valor["totaPositivos"] + $valor["totaNegativos"];?></span></div>
 					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="ejecutar.php?ruta=<?php echo $valor["id_r"];?>" target="_blank" class="vistasdescargas" data-id="<?php echo $valor["id_r"]; ?>" data-metodo="ver" data-ruta="<?php echo $valor["ruta"];?>">Probar</a></div>
 					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="#" class="vistasdescargas" data-id="<?php echo $valor["id_r"]; ?>" data-metodo="descargar" data-ruta="<?php echo $valor["ruta"];?>">Descargar</a></div>
-					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="#" class="recomendacion" data-id="<?php echo $valor["id_r"];?>">Recomendar</a></div>
+					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="#" data-toggle="modal" data-target="#recomendar-recurso" class="recomendacion" data-id="<?php echo $valor["id_r"];?>">Recomendar</a></div>
 				</div>
 				<br>
 			</section>

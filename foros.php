@@ -24,8 +24,11 @@ include "fcn/incluir-css-js.php";
 	</section>
 </div>
 <div class="modal-backdrop fade in cargador" style="display:none"></div>
-<?php include "modales/m_registrar_tema.php";?>
-<?php include "modales/m_registrar_aporte.php";?>
+<?php 
+include "modales/m_registrar_tema.php";
+include "modales/m_registrar_aporte.php";
+include "modales/m_recomendar.php";
+?>
 <script src="js/foros.js"></script>
 </body>
 </html>

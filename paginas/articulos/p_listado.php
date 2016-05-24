@@ -43,7 +43,7 @@ $habilitado=!isset($_SESSION["id"])?"No":"Si";
 					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">Comentarios: <i class="fa fa-thumbs-up calificacion <?php echo $cal1;?>" style="cursor:pointer" data-id='<?php echo $articulo->id;?>' data-calificacion="1"></i> <?php echo $totaPositivos;?>
 					<i class="fa fa-thumbs-down calificacion <?php echo $cal2;?>" style="cursor:pointer" data-id='<?php echo $articulo->id;?>' data-calificacion="-1"></i> <?php echo $totaNegativos;?> Total <?php echo $totaComentarios;?></div>
 					<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"><a href="#" class="vistas" data-id="<?php echo $arti->id; ?>" data-metodo="ver" data-ruta="<?php echo $arti->a_ruta;?>">Ver</a></div>
-					<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"><a href="#" class="recomendacion" data-id="<?php echo $valor["id"];?>">Recomendar</a></div>
+					<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"><a href="#" data-toggle="modal" data-target="#recomendar-recurso" class="recomendacion" data-id="<?php echo $valor["id"];?>">Recomendar</a></div>
 				</div>
 				<br>
 			</div>

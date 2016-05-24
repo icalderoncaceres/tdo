@@ -1,35 +1,35 @@
 $(document).ready(function(){
-        $(".menu").removeClass("active");
-        $(".menu#menuarticulos").addClass("active");
-	$("#ajaxContainer").on("click",".vistas",function(){		
-		if($("#ajaxContainer").data("disponible")=="No"){
-			swal({
-				title: "INICIA SESION",
-				text: "Necesitar iniciar session, adelante es GRATIS",
-				imageUrl: "galeria/img/logos/bill-ok.png",
-				showConfirmButton: true
-			});
-			return false;
-		}
-		window.open($(this).data("ruta"));
-		var ruta=$(this).data("ruta");
-		id=$(this).data("id");
-		metodo=$(this).data("metodo");
-		$.ajax({
-			url:"paginas/articulos/fcn/f_articulos.php",
-			data:{metodo:metodo,id:id},
-			type:"POST",
-			dataType:"html",
-			success:function(data){
-				var total=$("#totaVisitas" + id).data("total") + 1;
-				$("#totaVisitas" + id).data("total",total);
-				$("#totaVisitas" + id).text(total);
-//				$("#ajaxContainer").load(ruta);
+    $("li.menu").removeClass("active");
+    $("li#menuarticulos").addClass("active");
+	$("#ajaxContainer").on("click","a.vistas",function(){
+			if($("div#ajaxContainer").data("disponible")=="No"){
+				swal({
+					title: "INICIA SESION",
+					text: "Necesitar iniciar session, adelante es GRATIS",
+					imageUrl: "galeria/img/logos/bill-ok.png",
+					showConfirmButton: true
+				});
+				return false;
 			}
-		});
-
+			var objeto=$(this);
+			window.open(objeto.data("ruta"));
+			var ruta=objeto.data("ruta");
+			id=objeto.data("id");
+			metodo=objeto.data("metodo");
+			$.ajax({
+				url:"paginas/articulos/fcn/f_articulos.php",
+				data:{metodo:metodo,id:id},
+				type:"POST",
+				dataType:"html",
+				success:function(data){
+					var total=$("#totaVisitas" + id).data("total") + 1;
+					$("#totaVisitas" + id).data("total",total);
+					$("#totaVisitas" + id).text(total);
+//					$("#ajaxContainer").load(ruta);
+				}
+			});
 	});
-	$("#ajaxContainer").on("click",".calificacion",function(){
+	$("#ajaxContainer").on("click","i.calificacion",function(){
 		if($("#ajaxContainer").data("disponible")=="No"){
 			swal({
 				title: "INICIA SESION",
@@ -39,15 +39,16 @@ $(document).ready(function(){
 			});
 			return false;
 		}
-		var id=$(this).data("id");
-		var calificacion=$(this).data("calificacion");
+		var objeto=$(this);
+		var id=objeto.data("id");
+		var calificacion=objeto.data("calificacion");
 		var metodo="calificar";
-		if($(this).hasClass("red")){
-			$(this).removeClass("red");			
+		if(objeto.hasClass("red")){
+			objeto.removeClass("red");			
 			accion="quitar";
 		}else{
-			$(this).parent().find('.calificacion').removeClass("red");
-			$(this).addClass("red");
+			objeto.parent().find('.calificacion').removeClass("red");
+			objeto.addClass("red");
 			accion="poner";
 		}		
 		$.ajax({
@@ -60,7 +61,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$("#ajaxContainer").on("click",".recomendacion",function(){
+	$("#ajaxContainer").on("click",".recomendacionxx",function(){
 		if($("#ajaxContainer").data("disponible")=="No"){
 			swal({
 				title: "INICIA SESION",

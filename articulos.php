@@ -22,6 +22,7 @@ include "fcn/incluir-css-js.php";
 </div>
 <?php	
 	include "modales/m_registrar.php";
+	include "modales/m_recomendar.php";
 ?>
 <div class="modal-backdrop fade in cargador" style="display:none"></div>
 

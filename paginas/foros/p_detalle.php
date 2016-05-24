@@ -81,7 +81,7 @@ if(isset($_SESSION["id"])){
 						<div id="calificaciones<?php echo $valor["id_a"]; ?>">
 							<i class="fa fa-thumbs-up calificacion <?php echo $cal1;?>" data-id="<?php echo $valor["id_a"];?>" data-disponible="<?php echo $disponible;?>" data-calificacion="1"></i> <?php echo $totalCal["good"];?>&nbsp;&nbsp;
 							<i class="fa fa-thumbs-down calificacion <?php echo $cal2;?>" data-id="<?php echo $valor["id_a"];?>" data-calificacion="-1"></i> <?php echo $totalCal["bad"];?>
-							&nbsp;&nbsp;&nbsp;<a href="#" class="recomendacion" data-id="<?php echo $valor["id_a"];?>">Recomendar</a>
+							&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#recomendar-recurso" class="recomendacion"  data-id="<?php echo $valor["id_a"];?>">Recomendar</a>
 						</div>						
 					</footer>
 					<div class="col-xs-12"><hr></div>

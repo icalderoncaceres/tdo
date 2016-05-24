@@ -20,7 +20,6 @@ $result=$bd->query("select r.usuarios_id,count(r.id) as tota,seudonimo from recu
         <br>
     </div>
     <?php
-    var_dump(unserialize($_COOKIE["lista"]));
     foreach ($result as $r=>$valor):
         ?>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">

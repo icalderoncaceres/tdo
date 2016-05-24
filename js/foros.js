@@ -1,7 +1,7 @@
 $(document).ready(function(){
-        $(".menu").removeClass("active");
-        $(".menu#menuforos").addClass("active");
-	$("#ajaxContainer").on("click",".vinculos-areas",function(){
+    $("li.menu").removeClass("active");
+    $("li#menuforos").addClass("active");
+	$("div#ajaxContainer").on("click","div.vinculos-areas",function(){
 		var area=$(this).data("area");
 		$.ajax({
 			url:"paginas/foros/p_temas.php",
@@ -9,14 +9,14 @@ $(document).ready(function(){
 			type:"POST",
 			dataType:"html",
 			success:function(data){
-				$("#ajaxContainer").html(data);
-				$('#editorTema').trumbowyg({
+				$("div#ajaxContainer").html(data);
+				$('div#editorTema').trumbowyg({
 					lang : 'es'
 				});
 			}
 		});
 	});
-	$("#ajaxContainer").on("click",".vinculos-temas",function(){
+	$("div#ajaxContainer").on("click",".vinculos-temas",function(){
 		var tema=$(this).data("tema");
 		$.ajax({
 			url:"paginas/foros/p_detalle.php",
@@ -24,19 +24,19 @@ $(document).ready(function(){
 			type:"POST",
 			dataType:"html",
 			success:function(data){
-				$("#ajaxContainer").html(data);
-				$('#editor').trumbowyg({
+				$("div#ajaxContainer").html(data);
+				$('div#editor').trumbowyg({
 					lang : 'es'
 				});
 			}
 		});
 	});
-	$("#ajaxContainer").on("click",".cmdVolver",function(){
-		$("#ajaxContainer").load($(this).data("pagina"));
+	$("div#ajaxContainer").on("click","button.cmdVolver",function(){
+		$("div#ajaxContainer").load($(this).data("pagina"));
 	});
-	$("#btnAgregar").click(function(e){
+	$("button#btnAgregar").click(function(e){
 		e.preventDefault();
-		var id=$("#btnNuevo").data("id");
+		var id=$("button#btnNuevo").data("id");
 		form=$("#form-reg-aporte").serialize() + "&metodo=guardarAporte&id=" + id;
 		$.ajax({
 			url:"paginas/foros/fcn/f_foros.php",
@@ -51,16 +51,16 @@ $(document).ready(function(){
 					type:"POST",
 					dataType:"html",
 					success:function(data){
-						$("#ajaxContainer").html(data);
+						$("div#ajaxContainer").html(data);
 					}
 				});
-				$("#reg-aporte").modal('hide');
+				$("div#reg-aporte").modal('hide');
 			}
 		});
 	});
-	$("#btnAgregarTema").click(function(e){
+	$("button#btnAgregarTema").click(function(e){
 		e.preventDefault();
-		var id=$("#btnNuevoTema").data("id");
+		var id=$("button#btnNuevoTema").data("id");
 		form=$("#form-reg-tema").serialize() + "&metodo=guardarTema&id=" + id;
 		$.ajax({
 			url:"paginas/foros/fcn/f_foros.php",
@@ -75,18 +75,18 @@ $(document).ready(function(){
 					type:"POST",
 					dataType:"html",
 					success:function(data){
-						$("#ajaxContainer").html(data);
+						$("div#ajaxContainer").html(data);
 					}
 				});
-				$("#reg-tema").modal('hide');
+				$("div#reg-tema").modal('hide');
 			}
 		});
 	});
-	$("#ajaxContainer").on("click","#btnBuscar",function(){
-		if($("#txtBusqueda").val()!=""){
-			var valor=$("#txtBusqueda").val().toUpperCase();
+	$("div#ajaxContainer").on("click","button#btnBuscar",function(){
+		if($("input#txtBusqueda").val()!=""){
+			var valor=$("input#txtBusqueda").val().toUpperCase();
 			var c=0;
-			$(".aportes").each(function(e){
+			$("section.aportes").each(function(e){
 				var contenido=$(this).data("contenido").toUpperCase();
 				if(contenido.indexOf(valor)==-1) {
 					$(this).css("display","none");
@@ -95,17 +95,17 @@ $(document).ready(function(){
 					$(this).css("display","block");
 				}
 			});
-			$("#filtradopor").text("Filtrado por " + $("#txtBusqueda").val());
+			$("#filtradopor").text("Filtrado por " + $("input#txtBusqueda").val());
 		}else{
-			$(".aportes").css("display","block");
+			$("section.aportes").css("display","block");
 			$("#filtradopor").text("");
 		}
 	});
-	$("#ajaxContainer").on("click","#btnBuscarTema",function(){
-		if($("#txtBusquedaTema").val()!=""){
-			var valor=$("#txtBusquedaTema").val().toUpperCase();
+	$("div#ajaxContainer").on("click","button#btnBuscarTema",function(){
+		if($("input#txtBusquedaTema").val()!=""){
+			var valor=$("input#txtBusquedaTema").val().toUpperCase();
 			var c=0;
-			$(".temas").each(function(e){
+			$("section.temas").each(function(e){
 				var titulo=$(this).data("titulo").toUpperCase();				
 				if(titulo.indexOf(valor)==-1) {
 					$(this).css("display","none");
@@ -114,15 +114,15 @@ $(document).ready(function(){
 					$(this).css("display","block");
 				}
 			});
-			$("#filtradoporTema").text("Filtrado por " + $("#txtBusquedaTema").val());
+			$("#filtradoporTema").text("Filtrado por " + $("input#txtBusquedaTema").val());
 		}else{
-			$(".temas").css("display","block");
+			$("section.temas").css("display","block");
 			$("#filtradoporTema").text("");
 		}
 	});
-	$("#ajaxContainer").on('click','.botonPagina',function(){
+	$("div#ajaxContainer").on('click','a.botonPagina',function(){
 		var pagina=$(this).data("pagina");
-		var id=$("#filas").data("id");
+		var id=$("div#filas").data("id");
 		var actual=$(this).parent();
 		$.ajax({
 			url:"paginas/foros/fcn/f_foros.php",
@@ -130,50 +130,50 @@ $(document).ready(function(){
 			type:"POST",
 			dataType:"html",
 			success:function(data){
-				$("#filas").html(data);
-				$('.pagination li').removeClass("active");
+				$("div#filas").html(data);
+				$('ul.pagination li').removeClass("active");
 				actual.addClass("active");
 				if(pagina==1){
-					$('.pagination li').first().addClass("hidden");
+					$('ul.pagination li').first().addClass("hidden");
 				}else{
-					$('.pagination li').first().removeClass("hidden");
+					$('ul.pagination li').first().removeClass("hidden");
 				}
 				if(pagina==$("#filas").data("totalpaginas")){
-					$('.pagination li').last().addClass("hidden");
+					$('ul.pagination li').last().addClass("hidden");
 				}else{
-					$('.pagination li').last().removeClass("hidden");
+					$('ul.pagination li').last().removeClass("hidden");
 				}
-				$("#filas").data("actualpagina",pagina);
+				$("div#filas").data("actualpagina",pagina);
 			}
 		});
 	});
-	$("#ajaxContainer").on('click','#anterior',function(){
-		var pagina=$("#filas").data("actualpagina") - 1;
-		var id=$("#filas").data("id");
-		var actual=$('.pagination li a[data-pagina=' + pagina + ']').parent();
+	$("div#ajaxContainer").on('click','li#anterior',function(){
+		var pagina=$("div#filas").data("actualpagina") - 1;
+		var id=$("div#filas").data("id");
+		var actual=$('ul.pagination li a[data-pagina=' + pagina + ']').parent();
 		$.ajax({
 			url:"paginas/foros/fcn/f_foros.php",
 			data:{metodo:"cambiarPagina",pagina:pagina,id:id},
 			type:"POST",
 			dataType:"html",
 			success:function(data){
-				$("#filas").html(data);
-				$('.pagination li').removeClass("active");
+				$("div#filas").html(data);
+				$('ul.pagination li').removeClass("active");
 				actual.addClass("active");
 				if(pagina==1){
-					$('.pagination li').first().addClass("hidden");
+					$('ul.pagination li').first().addClass("hidden");
 				}else{
-					$('.pagination li').first().removeClass("hidden");
+					$('ul.pagination li').first().removeClass("hidden");
 				}
-				$('.pagination li').last().removeClass("hidden");
-				$("#filas").data("actualpagina",pagina);
+				$('ul.pagination li').last().removeClass("hidden");
+				$("div#filas").data("actualpagina",pagina);
 			}
 		});		
 	});
-	$("#ajaxContainer").on('click','#siguiente',function(){
-		var pagina=$("#filas").data("actualpagina") + 1;
-		var id=$("#filas").data("id");
-		var actual=$('.pagination li a[data-pagina=' + pagina + ']').parent();
+	$("div#ajaxContainer").on('click','li#siguiente',function(){
+		var pagina=$("div#filas").data("actualpagina") + 1;
+		var id=$("div#filas").data("id");
+		var actual=$('ul.pagination li a[data-pagina=' + pagina + ']').parent();
 		$.ajax({
 			url:"paginas/foros/fcn/f_foros.php",
 			data:{metodo:"cambiarPagina",pagina:pagina,id:id},
@@ -181,19 +181,19 @@ $(document).ready(function(){
 			dataType:"html",
 			success:function(data){
 				$("#filas").html(data);
-				$('.pagination li').removeClass("active");
+				$('ul.pagination li').removeClass("active");
 				actual.addClass("active");
-				if(pagina==$("#filas").data("totalpaginas")){
-					$('.pagination li').last().addClass("hidden");
+				if(pagina==$("div#filas").data("totalpaginas")){
+					$('ul.pagination li').last().addClass("hidden");
 				}else{
-					$('.pagination li').last().removeClass("hidden");
+					$('ul.pagination li').last().removeClass("hidden");
 				}
-				$('.pagination li').first().removeClass("hidden");
-				$("#filas").data("actualpagina",pagina);
+				$('ul.pagination li').first().removeClass("hidden");
+				$("div#filas").data("actualpagina",pagina);
 			}
 		});
 	});
-	$("#ajaxContainer").on('click','.calificacion',function(){
+	$("div#ajaxContainer").on('click','i.calificacion',function(){
 		if($("#filas").data("disponible")=="No"){
 			swal({
 				title: "INICIA SESION",
@@ -203,16 +203,17 @@ $(document).ready(function(){
 			});
 			return false;
 		}
-		var id=$(this).data("id");
-		if($(this).hasClass("red")){
-			$(this).removeClass("red");			
+		var objeto=$(this);
+		var id=objeto.data("id");
+		if(objeto.hasClass("red")){
+			objeto.removeClass("red");			
 			var accion="quitar";
 		}else{
-			$("#calificaciones" + id + " .calificacion").removeClass("red");
-			$(this).addClass("red");
+			$("div#calificaciones" + id + " .calificacion").removeClass("red");
+			objeto.addClass("red");
 			var accion="poner";
 		}
-		var calificacion=$(this).data("calificacion");
+		var calificacion=objeto.data("calificacion");
 		$.ajax({
 			url:"paginas/foros/fcn/f_foros.php",
 			data:{metodo:"calificar",id:id,accion:accion,calificacion:calificacion},
@@ -223,7 +224,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$("#ajaxContainer").on("click",".recomendacion",function(){
+	$("div#ajaxContainer").on("click",".recomendacionxx",function(){
 		if($(this).data("disponible")=="No"){
 			swal({
 				title: "INICIA SESION",

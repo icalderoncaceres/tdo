@@ -18,7 +18,7 @@ $(document).ready(function(){
 		var marcado=$(this).data("marcado") * -1;
 		$(this).data("marcado",marcado);
 	});
-	$("#ajaxContainer").on("click","#btnContinuar",function(){
+	$("#ajaxContainer").on("click","button#btnContinuar",function(){
 		var area=$("#ajaxContainer").data("area");
 		var filtro="";
 		for(var i=0;i<6;i++){
@@ -103,7 +103,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$("#ajaxContainer").on("click",".recomendacion",function(){
+	$("#ajaxContainer").on("click",".recomendacionxx",function(){
 		if($("#filas").data("disponible")=="No"){
 			swal({
 				title: "INICIA SESION",
