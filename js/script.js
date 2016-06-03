@@ -13,7 +13,6 @@
                             console.log(data);
                             $("#info-conversacion #ajaxConversacion").data("amigo",id);
                             $("div#ajaxConversacion").html(data);
-//                            loadingAjax(false);
 			}
 		});
 	});
@@ -131,7 +130,7 @@
 						}, function(){			
 							location.reload();
 						});
-                }              
+                    }              
           	},// código a ejecutar si la petición falla;
             error: function (xhr, status) {
             	SweetError(status);
@@ -300,5 +299,74 @@
 		}else{
 			$(this).data("valor","0");
 		}
-	});        
+	});
+        $("div#recomendar-grupos").on("click","input#todos-grupos",function(){
+           if(!$(this).prop("checked")){
+               $("div#recomendar-grupos .mis-grupos").prop("checked","");
+           }else{
+               $("div#recomendar-grupos .mis-grupos").prop("checked","checked");
+           }
+        });
+        $("div#recomendar-grupos").on("click","input.mis-grupos",function(){
+           if(!$(this).prop("checked"))
+               $("div#recomendar-grupos").find("input#todos-grupos").prop("checked","");
+           else{
+               var enc=false;
+               $("div#recomendar-grupos").find("input.mis-grupos").each(function(e){
+                  if(!$(this).prop("checked")){
+                      enc=true;
+                      $("div#recomendar-grupos").find("input#todos-grupos").prop("checked","");
+                      return false;
+                  }
+               });
+               if(!enc)
+               $("div#recomendar-grupos").find("input#todos-grupos").prop("checked","checked");
+           }
+        });
+        $(document).on("click","a.recomendacion",function(){
+            $("body").data("id",$(this).data("id"));
+        });
+        $("button#btnRecomendar").click(function(e){
+            var mensaje=$("textarea#txtmensaje-recomendar").val();
+            var grupos="";            
+            $("div#recomendar-grupos").find("input.mis-grupos").each(function(e){
+               if($(this).prop("checked")){
+                   grupos+=$(this).attr("value") + ",";
+                }
+            });
+            grupos=grupos.substr(0,grupos.length-1);
+            if(grupos==""){
+                swal({
+                    title: "Faltan los grupos",
+                    text: "Debe seleccionar los grupos a los que quiere recomendar",
+                    imageUrl: "galeria/img/logos/bill-ok.png",
+                    timer: 1500, 
+                    showConfirmButton: true
+                });
+                return false;
+            }
+            var tipo=$("#recomendar-evento").data("tipo");
+            var evento=$("body").data("id");
+            e.preventDefault();
+            $.ajax({
+                url:"fcn/f_index.php",
+                data:{mensaje:mensaje,metodo:"recomendar",tipo:tipo,grupos:grupos,evento:evento},
+                type:"POST",
+                dataType:"html",
+                success:function(data){
+                    console.log(data);
+                    swal({
+			title: "Excelente", 
+			text: "Gracias por aportar al conocimiento",
+			imageUrl: "galeria/img/logos/bill-ok.png",
+			timer: 1500, 
+                        showConfirmButton: true
+			}, function(){
+                            $("textarea#txtmensaje-recomendar").val("");
+                            $("div#recomendar-grupos").find("input").prop("checked","checked");
+                            $("#recomendar-evento").modal("hide");
+                    });
+                }
+            });
+        });
 });

@@ -26,12 +26,12 @@ $grupos=$usua->getGrupos();
 		$grupo=new grupos($valor["id"]);
 		$fondo=$fondo=="fondo1"?"fondo2":"fondo1";
         	?>
-                    <a href="grupo.php">
+                    <a href="grupo.php?id=<?php echo $grupo->id;?>">
 		    <div class="<?php echo $fondo;?> vinculos-temas">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5"><span><?php echo $grupo->nombre;?></span></div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4"><a href="grupo.php"><span><?php echo $grupo->getAdmin();?></span></div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2"><a href="grupo.php"><span><?php echo $grupo->getRelacion();?></span></div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-1"><a href="grupo.php"><span class="text-right"><?php echo $grupo->countMiembros();?></span></div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4"><span><?php echo $grupo->getAdmin();?></span></div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2"><span><?php echo $grupo->getRelacion();?></span></div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-1"><span class="text-right"><?php echo $grupo->countMiembros();?></span></div>
 		    </div>
                     </a>
 		    <?php

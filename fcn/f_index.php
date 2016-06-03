@@ -2,6 +2,7 @@
 include_once "../clases/ventanachat.php";
 include_once "../clases/bd.php";
 include_once "../clases/usuarios.php";
+include_once "../clases/eventos.php";
 switch($_POST["metodo"]){
 	case "buscarRegiones":
                 buscaRegiones();
@@ -12,6 +13,8 @@ switch($_POST["metodo"]){
         case "guardarMensaje":
                 guardaMensaje();
                 break;
+        case "recomendar":
+                recomienda();
 }
 function buscaRegiones(){
 	$bd=new bd();
@@ -40,5 +43,20 @@ function guardaMensaje(){
                        "fecha"=>$tiempo,
                        );
         $result=$bd->doInsert("mensajes",$valores);
+}
+function recomienda(){
+    $evento=new eventos();
+    if(!isset($_SESSION))
+        session_start();
+    $valores=array("mensaje"=>$_POST["mensaje"],
+                   "usuarios_id"=>$_SESSION["id"],
+                   "eventos_tipos_id"=>$_POST["tipo"],
+                   "fecha"=>date("Y-m-d H:i:s",time()),
+                   "evento_id"=>$_POST["evento"],
+                   "grupos"=>$_POST["grupos"],
+                   "estado"=>1
+                   );
+    $result=$evento->nuevoEvento($valores);
+    echo $result;
 }
 ?>

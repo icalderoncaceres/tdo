@@ -27,6 +27,7 @@ include "fcn/incluir-css-js.php";
 <?php 
 include "modales/m_registrar_tema.php";
 include "modales/m_registrar_aporte.php";
+if(isset($_SESSION["id"]))
 include "modales/m_recomendar.php";
 ?>
 <script src="js/foros.js"></script>

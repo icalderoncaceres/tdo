@@ -1492,3 +1492,9 @@ opacity: 1;
 		margin-left: 0px;
 	}
 }
+.recomendar-grupos{
+    width:450px;
+    height:200px;overflow: scroll; 
+    overflow-x: hidden;
+    padding-left: 15px;    
+}

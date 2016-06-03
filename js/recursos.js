@@ -1,6 +1,7 @@
 $(document).ready(function(){
         $(".menu").removeClass("active");
         $(".menu#menurecursos").addClass("active");
+        $("#recomendar-evento").data("tipo",3);
 	$("#ajaxContainer").on("click",".vinculos-areas",function(){
 		var area=$(this).data("area");
 		$.ajax({
