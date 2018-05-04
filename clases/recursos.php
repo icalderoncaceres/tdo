@@ -5,6 +5,7 @@ include_once 'bd.php';
  * @property int id
  * @property string r_titulo;
  * @property string r_descripcion;
+ * @property string r_scope;
  * @property string r_areas_id;
  * @property string r_tipos_id;
  * @property string r_usuarios_id;
@@ -18,10 +19,12 @@ class recursos{
 	private $id;
 	private $r_titulo;
 	private $r_descripcion;
+    private $r_scope;
 	private $r_areas_id;
 	private $r_tipos_id;
 	private $r_usuarios_id;
 	private $r_ruta;
+	private $r_vinculo;	
 	private $r_fecha;
 	private $r_status;
 	private $r_formatos_id;
@@ -30,7 +33,7 @@ class recursos{
 			$this->buscarRecurso($id);
 		}
 	}
-	public function nuevoRecurso($params){  //Función que se mejorara a medida que se utilice la clase
+	public function nuevoRecurso($params){  //Funcion que se mejorara a medida que se utilice la clase
 		$bd = new bd();
 		$result = $bd->doInsert($this->r_table, $params);
 		if($result){
@@ -47,10 +50,12 @@ class recursos{
 			$valores["id"] = $result["id"];
 			$valores["r_titulo"] = $result["titulo"];
 			$valores["r_descripcion"] = $result["descripcion"];
+            $valores["r_scope"] = $result["scope"];
 			$valores["r_areas_id"] = $result["areas_id"];
 			$valores["r_tipos_id"] = $result["tipos_id"];
 			$valores["r_usuarios_id"] = $result["usuarios_id"];
-			$valores["r_ruta_id"] = $result["ruta"];
+			$valores["r_ruta"] = $result["ruta"];
+			$valores["r_vinculo"] = $result["vinculo"];
 			$valores["r_fecha"] = $result["fecha"];
 			$valores["r_status"] = $result["status"];
 			$valores["r_formatos_id"] = $result["formatos_id"];
@@ -162,7 +167,17 @@ class recursos{
 		}
 	}
 	public function atributoFormateado($atributo="titulo",$longitud=15){
-		$devolver=(strlen($this->$atributo)<=$longitud?$this->titulo:substr($this->titulo,0,$longitud) . "...");
+		$devolver=(strlen($this->$atributo)<=$longitud?$this->$atributo:substr($this->$atributo,0,$longitud) . "...");
 		return $devolver;
+	}
+	public function getDestino($id=NULL){
+		if(is_null($id)){
+			$id=$this->id;
+		}
+		if(is_null($this->r_ruta) || $this->r_ruta==""){
+			return $this->r_vinculo;
+		}else{
+			return "$this->r_ruta";
+		}
 	}
 }

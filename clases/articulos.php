@@ -150,9 +150,9 @@ class articulos {
 		$this->a_fecha = $fecha;
 		$this->a_status = $status;
 	}
-	public function listarArticulos(){
+	public function listarArticulos($status=1){
 		$bd=new bd();
-		$result=$bd->query("select id from articulos order by fecha desc");
+		$result=$bd->query("select id from articulos where status=$status order by fecha desc");
 		return $result;
 	}
 	public function getVisitas($id=NULL){

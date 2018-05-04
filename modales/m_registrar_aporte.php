@@ -16,7 +16,8 @@
 				<div class="modal-body marL20 marR20 ">
 					<br>
 					<section class="form-apdp">
-						<div id="editor" ></div>
+<!--					<div id="editor" ></div>-->
+						<textarea class="form-textarea" rows="4"  placeholder="Registra tu aporte" id="txt-aporte" name="txt-aporte"></textarea>
 					</section>
 				</div>
 				<div class="modal-footer">

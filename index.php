@@ -19,6 +19,22 @@ include "fcn/incluir-css-js.php";
 		include "fcn/f_chat.php";
 	?>
 </section>
+<!--
+<section class="col-xs-12 center-block text-center hidden" id="youtube-section" name="youtube-section">
+	<div class="col-xs-12 col-sm-3">Cultura</div>
+	<div class="col-xs-12 col-sm-3">Deportes</div>
+	<div class="col-xs-12 col-sm-3">Educaci&oacute;n</div>
+	<div class="col-xs-12 col-sm-3">Tecnolog&iacute;a</div>
+</section>
+-->
+<section class="col-xs-12">
+	<?php
+		if(isset($_SESSION["id"])){
+			if(strtoupper($_SESSION["seudonimo"])=="ICALDERON")
+				include "paginas/index/p_redes.php";
+		}
+	?>
+</section>
 <?php include "temas/footer.php";?>
 </div>
 <?php	

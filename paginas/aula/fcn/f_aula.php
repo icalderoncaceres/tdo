@@ -2,7 +2,8 @@
 	include "../../../clases/bd.php";
 	include "../../../clases/grupos.php";
 	include "../../../clases/representantes.php";        
-	switch($_POST["metodo"]){
+        $metodo= filter_input(INPUT_POST,"metodo");
+	switch($metodo){
 		case "guardarGrupo":
 		    guardaGrupo();
 		    break;
@@ -22,37 +23,45 @@
 	function guardaGrupo(){
 		$grupo=new grupos();
 		$tiempo = date("Y-m-d H:i:s",time());
-                if($_POST["marcado"]==0){
-                    $fechaFin=$_POST["txtFecha"];
+                $marcado=filter_input(INPUT_POST,"marcado");
+                $fecha=filter_input(INPUT_POST,"txtFecha");
+                $nombre=filter_input(INPUT_POST,"txtnombre");
+                $descripcion=filter_input(INPUT_POST,"cmbdescripcion");
+                if($marcado==0){
+                    $fechaFin=$fecha;
                 }else{
                     $fechaFin=NULL;
                 }
-                if(!isset($_SESSION))
+                if(!isset($_SESSION)){
                     session_start ();
-		$valores=array("nombre"=>$_POST["txtnombre"],
+                }
+		$valores=array("nombre"=>$nombre,
 			       "fecha"=>$tiempo,
 			       "fecha_fin"=>$fechaFin,
-			       "relaciones_id"=>$_POST["cmbdescripcion"],
+			       "relaciones_id"=>$descripcion,
                                "usuarios_id"=>$_SESSION["id"]
 			       );                
 		return $result=$grupo->nuevoGrupo($valores);
 	}
         function buscaGrupo(){
             $grupo=new grupos();
-            $result=$grupo->getGrupo($_POST["txtCodigo"]);
+            $codigo=filter_input(INPUT_POST,"txtCodigo");
+            $result=$grupo->getGrupo($codigo);
             echo json_encode($result);
         }
         function agregaGrupo(){
-            $grupo=new grupos($_POST["id"]);
-            $result=$grupo->addUsuario();
+            $id=  filter_input(INPUT_POST,"id");
+            $grupo=new grupos($id);
+            $grupo->addUsuario();
         }
         function generaCodigo(){
             $bd=new bd();
-            if(!isset($_SESSION))
+            if(!isset($_SESSION)){
                 session_start();
+            }
             $result=$bd->query("select id,codigo from codigos where grupos_id is null and usuarios_id is null limit 1");
             $row=$result->fetch();
-            $result=$bd->doUpdate("codigos",array("usuarios_id"=>$_SESSION["id"]),"id={$row["id"]}");
+            $bd->doUpdate("codigos",array("usuarios_id"=>$_SESSION["id"]),"id={$row["id"]}");
 	    if($result){
 		echo $row["codigo"];
 	    }else{
@@ -61,7 +70,8 @@
         }
 	function vinculaRep(){
 	    $rep=new representantes();
-            $result=$rep->nuevoRepresentante($_POST["codigo"]);
+            $codigo=  filter_input(INPUT_POST, "codigo");
+            $result=$rep->nuevoRepresentante($codigo);
             echo $result;
 	}
 ?>

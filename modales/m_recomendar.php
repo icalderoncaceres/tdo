@@ -25,12 +25,12 @@ $grupos=$bd->query("select a.id,a.nombre from grupos as a,usuarios_grupos as b w
 			<form id="form-reg-aporte" class="form-inline">
 				<div class="modal-body marL20 marR20 ">
 					<br>
-					<section class="form-apdp t20">
+					<section class="form-group t20">
 						Agrega un mensaje<br>
-                                                <textarea id="txtmensaje-recomendar" name="txtmensaje-recomendar" cols="40" rows="5" maxlength="240"></textarea>
+                                                <textarea class="form-textarea" id="txtmensaje-recomendar" name="txtmensaje-recomendar" rows="5" cols="90" maxlength="240"></textarea>
 					</section>
 				</div>
-				<div id="recomendar-grupos" class="recomendar-grupos t14">
+				<div id="recomendar-grupos" class="form-group recomendar-grupos t14">
 					<input id="todos-grupos" name="todos-grupos" type="checkbox" checked> Todos mis grupos</input>
 					<hr>
 					<?php

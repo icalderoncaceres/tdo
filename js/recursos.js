@@ -54,6 +54,7 @@ $(document).ready(function(){
 		var id=$(this).data("id");
 		var metodo=$(this).data("metodo");
 		var ruta=$(this).data("ruta");
+		var vinculo=$(this).data("vinculo");
 		$.ajax({
 			url:"paginas/recursos/fcn/f_recursos.php",
 			data:{metodo:metodo,id:id,ruta:ruta},
@@ -68,8 +69,12 @@ $(document).ready(function(){
 					var total=$("#totaDescargas" + id).data("total") + 1;
 					$("#totaDescargas" + id).data("total",total);
 					$("#totaDescargas" + id).text(total);
-					window.open("descargar.php?ruta=" + ruta);
 				}
+				if(ruta!=""){
+					window.open(ruta,"_blank");
+				}else{
+					window.open(vinculo,"_blank");	
+				}				
 			}
 		});
 	});

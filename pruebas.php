@@ -1,70 +1,86 @@
-<?php
-include "clases/publicaciones.php";
-include "fcn/incluir-css-js.php";
-//include "clases/bd.php";
-/*
-$publicacion=new publicaciones(24);
-$bd=new bd();
-$resultado=$bd->doFullSelect("clasificados");
-foreach ($resultado as $r => $valor) {
-	$cadena="I" . $valor["id"] . "F";
-	if(!is_null($valor["clasificados_id"])){
-		$condicion="id={$valor['clasificados_id']}";
-		$resultado2=$bd->doSingleSelect("clasificados",$condicion);
-		while(!is_null($resultado2["clasificados_id"])){
-			$cadena ="I" . $resultado2["id"] . "F" . $cadena;
-			$resultado2=$bd->doSingleSelect("clasificados","id={$resultado2["clasificados_id"]}");
+<!--
+<script>
+function iniciar(){
+	var recognition;
+	var recognizing = false;
+	if (!('webkitSpeechRecognition' in window)) {
+		alert("¡API no soportada!");
+	} else {	
+		elemento=document.getElementById("procesar");
+		elemento.addEventListener("click",procesar);
+		recognition = new webkitSpeechRecognition();
+		recognition.lang = "es-VE";
+		recognition.continuous = true;
+		recognition.interimResults = true;
+		recognition.onstart = function() {
+			recognizing = true;
+			console.log("empezando a escuchar");
 		}
-		$cadena="I" . $resultado2["id"] . "F" . $cadena;
+		recognition.onresult = function(event) {
+			for (var i = event.resultIndex; i < event.results.length; i++) {
+				if(event.results[i].isFinal)
+				document.getElementById("texto").value += event.results[i][0].transcript;
+			}
+		}
+		recognition.onerror = function(event) {
+		}
+		recognition.onend = function() {
+			recognizing = false;
+			document.getElementById("procesar").innerHTML = "Escuchar";
+			console.log("terminó de escuchar, llegó a su fin");
+		}
 	}
-//	echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $valor["id"]  . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $cadena . "<br>";
-    echo "update clasificados set ruta='$cadena' where id={$valor["id"]};<br>";	
+	function procesar() {
+		if (recognizing == false) {
+			recognition.start();
+			recognizing = true;
+			document.getElementById("procesar").innerHTML = "Detener";
+		} else {
+			recognition.stop();
+			recognizing = false;
+			document.getElementById("procesar").innerHTML = "Escuchar";
+		}
+	}
 }
-//var_dump($publicacion->getPreguntasPublicacion());
-//var_dump($publicacion->listarPublicaciones(array(" usuarios_id="=>203,"clasificados_id="=>2)));
-
-//var_dump($publicacion->listarPublicaciones());
- * */
-	$bd=new bd();
-	$consulta="select * from publicaciones where id in (select publicaciones_id from publicacionesxstatus where status_publicaciones_id=1) order by id desc limit 5 OFFSET 5";
-	$result=$bd->query($consulta);
-	if(!empty($result)){
-	    $devolver = array();
-		foreach($result as $r){
-			$devolver[] = array(
-			"id" => utf8_encode($r['id']),
-			"titulo" => utf8_encode($r['titulo']));
-		}
-		echo json_encode($devolver);
-	}else{
-		echo json_encode(array("resultado"=>"Error"));
-	}
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-	
-<body>
-<!--<input type="text" id="currency" /> 
-	-->
-</body>
-<!--	
-<script type="text/javascript">
-	// jQuery noConflict wrapper & document load
-(function($){ 
-	$(function(){
-		// Define your currency field(s)
-		var currency_input = $('#currency');
-		// Check the document for currency field(s)
-		if ( currency_input.length > 0 ){
-			// Format the currency field when a user clicks or tabs outside of the input
-			currency_input.blur(function(){
-				$(this).formatCurrency();
-			});
-		}
-	});
-})(jQuery);
--->
 </script>
-</html>
+-->
+<?php
+include "clases/bd.php";
+$bd=new bd();
+/*
+$clave="contra";
+$clave_encriptada=hash("sha256",$clave);
+$valores=array("usuarios_id"=>14,
+	       "password"=>$clave_encriptada,
+	       "nombres"=>"Ivan Dario",
+	       "apellidos"=>"Calderon Caceres",
+	       "direccion"=>"Campo C",
+	       "telefonos"=>"0416-1793965",
+	       "email"=>"ivandario2010@gmail.com",
+               "nivel"=>1,
+	       "observaciones"=>"El fundador");
+$result=$bd->doInsert("employer",$valores);
+*/
+?>
+<body onload="iniciar()">
+<button id="procesar" name="procesar">Procesar</button>
+<input type="text" id="texto" name="texto"></input>
+			<input type="text" id="voz-usuario" name="voz-usuario" x-webkit-speech speech error onwebkitspeechchange="procesar();" placeholder="Repeat"></input>
+<?php
+$result=$bd->doFullSelect("eng_1_3");
+foreach($result as $r=>$valor){
+	$nuevoTexto=utf8_encode($valor["texto"]);
+	$nuevoTexto=substr($nuevoTexto,0,1)==" "?substr($nuevoTexto,1,strlen($nuevoTexto)-1):$nuevoTexto;
+	$nuevoTexto=substr($nuevoTexto,strlen($nuevoTexto)-1,1)==" "?substr($nuevoTexto,0,strlen($nuevoTexto)-1):$nuevoTexto;
+	$nuevoTexto=substr($nuevoTexto,strlen($nuevoTexto)-1,1)=="."?substr($nuevoTexto,0,strlen($nuevoTexto)-1):$nuevoTexto;
+//	$nuevoTexto = preg_replace("/[\n|\r|\n\r]/i",".",$nuevoTexto);
+	$id=$valor["id"];
+	$valores=array("texto"=>$nuevoTexto);
+	$res=$bd->doUpdate("eng_1_3",$valores,"id=$id");
+	echo $res . " &nbsp;&nbsp;Id: &nbsp;&nbsp;" . $id . " &nbsp;&nbsp;Texto: &nbsp;&nbsp;" . $nuevoTexto . "<br>";
+	echo "Id: &nbsp;&nbsp;" . $id . " &nbsp;&nbsp;Texto: &nbsp;&nbsp;" . $nuevoTexto . "<br>";	
+}
+echo $result;
+ ?>
 
+</body>

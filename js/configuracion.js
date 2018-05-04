@@ -2,11 +2,11 @@
  * JS "configuracion.php"
  */
 $(document).ready(function(){
-	$("#info-usuario").click(function(){
+	$("button#info-usuario").click(function(){
 		if($(this).data("type") === "N"){
-			$("#info-personal").modal("show");
+			$("div#info-personal").modal("show");
 		}else{
-			$("#info-empresarial").modal("show");
+			$("div#info-empresarial").modal("show");
 		}
 	});
 	/*---======= Validacion de Datos Personales NAT ========---*/
@@ -34,10 +34,7 @@ $(document).ready(function(){
 				notEmpty : {},
 				stringLength : {max : 512},
 				regexp: {regexp: /^[\u00F1a-z\s]+$/i}}},
-			p_telefono : {validators : {
-				notEmpty : {},
-				phone : {country:'VE'}}},
-			p_estado : {validators : {
+			e_regiones_id : {validators : {
 				notEmpty : {}}},
 			p_direccion : {validators : {
 				notEmpty : {},
@@ -47,40 +44,40 @@ $(document).ready(function(){
 		e.preventDefault();
 		var form = $(e.target);
 		var fv = form.data('formValidation');
-		var method = "&method=act-nat";
+		var method = "&method=act-nat&e_dia_nac=" + $("#e_dia_nac").val() + "&e_mes_nac=" + $("#e_mes_nac").val() + "&e_agno_nac=" + $("#e_agno_nac").val();
 		$.ajax({
 			url: form.attr('action'), // la URL para la petición
-            data: form.serialize() + method, // la información a enviar
-            type: 'POST', // especifica si será una petición POST o GET
-            dataType: 'json', // el tipo de información que se espera de respuesta
-            success: function (data) {
-            	// código a ejecutar si la petición es satisfactoria;
-            	// console.log(data);
-	            if (data.result === 'error') {
-	            	for (var field in data.fields) {
+                        data: form.serialize() + method, // la información a enviar
+                        type: 'POST', // especifica si será una petición POST o GET
+                        dataType: 'json', // el tipo de información que se espera de respuesta
+                        success: function (data) {
+                            // código a ejecutar si la petición es satisfactoria;
+                            // console.log(data);
+                            if (data.result === 'error') {
+                                for (var field in data.fields) {
 	        			fv
-	                    // Show the custom message
-	                    .updateMessage(field, 'blank', data.fields[field])
-	                    // Set the field as invalid
-	                    .updateStatus(field, 'INVALID', 'blank');
-	            	}
-	            } else {
-	            	swal({
-						title: "Exito", 
-						text: "Se actualizo correctamente.",
-						imageUrl: "galeria/img/logos/bill-ok.png",
-						timer: 2000, 
-						showConfirmButton: true
-						}, function(){
-							location.reload();
-						});
-                }
-          	},// código a ejecutar si la petición falla;
-            error: function (xhr, status) {
-            	SweetError(status);
-            }
+        	                    // Show the custom message
+                                    .updateMessage(field, 'blank', data.fields[field])
+                                    // Set the field as invalid
+                                    .updateStatus(field, 'INVALID', 'blank');
+                                }
+                            }else {
+                                swal({
+        				title: "Exito", 
+					text: "Se actualizo correctamente.",
+					imageUrl: "galeria/img/logos/bill-ok.png",
+					timer: 2000, 
+					showConfirmButton: true
+					}, function(){
+						location.reload();
+					});
+                           }
+                        },// código a ejecutar si la petición falla;
+                        error: function (xhr, status) {
+                            SweetError(status);
+                        }
+                });
         });
-    });
 	/*---======= Validacion de Datos Personales JUR ========---*/
 	$('#usr-act-form-jur').formValidation({
 		locale: 'es_ES',
@@ -103,9 +100,6 @@ $(document).ready(function(){
 				stringLength : {min : 5, max : 512}}},
 			e_categoria : {validators : {
 				notEmpty : {}}},
-			e_telefono : {validators : {
-				notEmpty : {},
-				phone : {country:'VE'}}},
 			e_estado : {validators : {
 				notEmpty : {}}},
 			e_direccion : {validators : {
@@ -119,22 +113,22 @@ $(document).ready(function(){
 		var method = "&method=act-jur";
 		$.ajax({
 			url: form.attr('action'), // la URL para la petición
-            data: form.serialize() + method, // la información a enviar
-            type: 'POST', // especifica si será una petición POST o GET
-            dataType: 'json', // el tipo de información que se espera de respuesta
-            success: function (data) {
-            	// código a ejecutar si la petición es satisfactoria;
-            	// console.log(data);
-	            if (data.result === 'error') {
-	            	for (var field in data.fields) {
+                        data: form.serialize() + method, // la información a enviar
+                        type: 'POST', // especifica si será una petición POST o GET
+                        dataType: 'json', // el tipo de información que se espera de respuesta
+                        success: function (data) {
+                            // código a ejecutar si la petición es satisfactoria;
+                            // console.log(data);
+                            if (data.result === 'error') {
+                                for (var field in data.fields) {
 	        			fv
-	                    // Show the custom message
-	                    .updateMessage(field, 'blank', data.fields[field])
-	                    // Set the field as invalid
-	                    .updateStatus(field, 'INVALID', 'blank');
-	            	}
-	            } else {
-	            	swal({
+                                            // Show the custom message
+                                            .updateMessage(field, 'blank', data.fields[field])
+                                            // Set the field as invalid
+                                            .updateStatus(field, 'INVALID', 'blank');
+                                }
+                            }else{
+                                swal({
 						title: "Exito",
 						text: "Se actualizo correctamente.",
 						imageUrl: "galeria/img/logos/bill-ok.png",
@@ -143,13 +137,13 @@ $(document).ready(function(){
 						}, function(){
 							location.reload();
 						});
-                }
-          	},// código a ejecutar si la petición falla;
-            error: function (xhr, status) {
-            	SweetError(status);
-            }
-        });
-    });
+                            }
+                    },// código a ejecutar si la petición falla;
+                    error: function (xhr, status) {
+                        SweetError(status);
+                    }
+                });
+            });
 	/*---======= Validacion de Datos Personales Correo ========---*/
 	$('#usr-act-form-email').formValidation({
 		locale: 'es_ES',
@@ -340,7 +334,6 @@ $(document).ready(function(){
 			            	$("#p_nombre").val(data.campos.n_nombre);
 			            	$("#p_apellido").val(data.campos.n_apellido);
 			            	$("#p_identificacion").val(data.campos.n_identificacion);
-			            	$('#p_telefono').val(data.campos.u_telefono);
 			            	$("#p_estado").val(data.campos.u_estados_id);
 			            	$('#p_direccion').val(data.campos.u_direccion);
 			            	$('#p_identificacion').data('valid',data.campos.n_identificacion);
@@ -350,7 +343,6 @@ $(document).ready(function(){
 			            	$("#e_razonsocial").val(data.campos.j_razon_social);
 			            	$("#e_categoria").val(data.campos.j_categorias_juridicos_id);
 			            	$("#e_rif").val(data.campos.j_rif);
-			            	$('#e_telefono').val(data.campos.u_telefono);
 			            	$("#e_estado").val(data.campos.u_estados_id);
 			            	$('#e_direccion').val(data.campos.u_direccion);
 		        			break;

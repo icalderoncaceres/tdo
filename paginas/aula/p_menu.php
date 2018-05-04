@@ -1,3 +1,10 @@
+<?php
+include_once "clases/bd.php";
+$bd=new bd();
+if(!isset($_SESSION))
+	session_start();
+$bd->doInsert("trafico",array("usuarios_id"=>$_SESSION["id"],"pagina"=>5,"fecha"=>date("Y-m-d H:i:s",time())));
+?>
 <h2><center>Men&uacute; principal</center></h2>
 <hr>
 <ul class="nav nav-pills nav-stacked">

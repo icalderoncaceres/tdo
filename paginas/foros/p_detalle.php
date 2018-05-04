@@ -75,7 +75,7 @@ if(isset($_SESSION["id"])){
 						<div class="col-sm-12 col-md-12 col-lg-12 fondo1"><span><?php echo utf8_encode($valor["contenido"]);?></span></div>
 					</div>
 					<div>
-						<div class="col-sm-12 col-md-12 col-lg-12 fondo2"><span><?php echo utf8_encode($valor["nombres"]) . " " . utf8_encode($valor["apellidos"]) ." / " . $valor["fecha"];?></span></div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12 fondo2"><span><a href="perfil.php?id=<?php echo $valor["id"];?>" target="_blank"><?php echo utf8_encode($valor["nombres"]) . " " . utf8_encode($valor["apellidos"]);?></a> <?php echo date("d/m/y H:i:s",strtotime($valor["fecha"]));?></span></div>
 					</div>
 					<footer class="pull-right">
 						<div id="calificaciones<?php echo $valor["id_a"]; ?>">

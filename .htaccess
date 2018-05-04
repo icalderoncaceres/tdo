@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteRule ^/?(zonaingles|foros|index|recursoseducativos|articulos|aulavirtual|uploader|registro|englishzone|moves|monitoreo)$ $1.php [S=1]
+#RewriteRule ^/?(index|favoritos|terminos|listado|resumen|compras|ventas|configuracion|salir|publicar|restablecer|estadisticas|carloshumberto|verificate|checkout)$ $1.php [S=1]

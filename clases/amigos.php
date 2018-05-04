@@ -27,17 +27,7 @@ class amigos {
 		}else{
 			return false;
 		}		
-	}
-	public function borrarFavorito($usuarios_id, $favoritos_id){
-		$bd = new bd();
-		$sql = $bd->query("DELETE FROM usuarios_favoritos WHERE usuarios_id = $usuarios_id AND favoritos_id = $favoritos_id");
-		if($sql->rowCount()>0){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
+	}	
 	public function buscarAmigos() {
 		$bd = new bd ();
 		$strSql="select usuarios.id as numero,CONCAT(usuarios.nombres,' ',usuarios.apellidos) as nombre,usuarios_accesos.seudonimo from usuarios,usuarios_accesos
@@ -67,4 +57,22 @@ class amigos {
 				"favoritos_id" => $favoritos_id
 		) );
 	}
+	public function borrarAmigo($usuarios_id, $amigos_id){
+		$bd = new bd();
+		$sql = $bd->query("DELETE FROM usuarios_amigos WHERE usuarios_id = $usuarios_id AND amigos_id = $amigos_id");
+		if($sql->rowCount()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function borrarFavorito($usuarios_id, $favoritos_id){
+		$bd = new bd();
+		$sql = $bd->query("DELETE FROM usuarios_favoritos WHERE usuarios_id = $usuarios_id AND favoritos_id = $favoritos_id");
+		if($sql->rowCount()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}        
 }

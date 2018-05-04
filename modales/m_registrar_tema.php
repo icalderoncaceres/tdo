@@ -16,7 +16,9 @@
 				<div class="modal-body marL20 marR20 ">
 					<br>
 					<section class="form-apdp">
-						<div id="editorTema" ></div>
+<!--					<div id="editorTema" ></div>-->
+						<input type="text" placeholder="Titulo máximo 60 caracteres" class="form-input" id="txt-titulo" name="txt-titulo"></input><br>
+						<textarea class="form-textarea" placeholder="Detalle del tema" rows="4" id="txt-detalle" name="txt-detalle"></textarea>
 					</section>
 				</div>
 				<div class="modal-footer">

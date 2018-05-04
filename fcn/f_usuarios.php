@@ -2,8 +2,8 @@
 include_once '../clases/fotos.php';
 include_once '../clases/usuarios.php';
 include_once '../clases/bd.php';
-
-switch ($_POST ["method"]) {
+$method=filter_input(INPUT_POST,"method");
+switch ($method) {
 	case "new" :
 		newUser ();
 		break;
@@ -28,6 +28,9 @@ switch ($_POST ["method"]) {
 	case "act-pass":
 		actPass();
 		break;
+        case "act-nat":
+                actNat();
+                break;
 	default :
 		echo "error";
 		break;
@@ -119,21 +122,27 @@ function actSeudonimo(){
 }
 function actSocial() {
 	$bd = new bd ();
-	var_dump ( $website );
 	$values = array (
-			"descripcion" => empty ( filter_input ( INPUT_POST, "descripcion" ) ) ? NULL : $descripcion,
-			"facebook" => empty ( filter_input ( INPUT_POST, "facebook" ) ) ? NULL : $facebook,
-			"twitter" => empty ( filter_input ( INPUT_POST, "twitter" )) ? NULL : $twitter,
-			"website" => empty ( filter_input ( INPUT_POST, "website" ) ) ? NULL : $website 
+			"descripcion" => filter_input ( INPUT_POST, "descripcion" ) ? NULL : filter_input ( INPUT_POST, "descripcion" ),
+			"facebook" => filter_input ( INPUT_POST, "facebook" ) ? NULL : filter_input ( INPUT_POST, "facebook" ),
+			"twitter" => filter_input ( INPUT_POST, "twitter" ) ? NULL : filter_input ( INPUT_POST, "twitter" ),
+			"website" => filter_input ( INPUT_POST, "website" ) ? NULL : filter_input ( INPUT_POST, "website" )
 	);
+        /*        
+	$values = array (
+			"descripcion" =>filter_input(INPUT_POST,descripcion),
+			"facebook" => $_POST["facebook"],
+			"twitter" => $_POST["twitter"],
+			"website" => $_POST["website"]
+	);
+         */
+        if(!isset($_SESSION)){
+            session_start();
+        }
 	if ($bd->doUpdate ( "usuarios", $values, "id = {$_SESSION["id"]}" )) {
-		echo json_encode ( array (
-				"result" => "OK" 
-		) );
+		echo "OK";
 	} else {
-		echo json_encode ( array (
-				"result" => "error" 
-		) );
+		echo "error";
 	}
 }
 function fotUser() {
@@ -195,7 +204,7 @@ function newUser() {
 	$foto = new fotos ();
 	$bd = new bd ();
 	
-	if (isset ( $_POST ["type"] )) {
+	if (filter_input(INPUT_POST,"type")) {
 		$seudonimo = filter_input ( INPUT_POST, "seudonimo" );
 		if ($bd->valueExist ( $usuario->a_table, $seudonimo, "seudonimo" )) {
 			$fields ["seudonimo"] = "El seudonimo no esta disponible";
@@ -211,13 +220,12 @@ function newUser() {
 		}
 		$nombres = filter_input ( INPUT_POST, "e_nombres" );
 		$apellidos = filter_input ( INPUT_POST, "e_apellidos" );
-		$telefono1 = filter_input ( INPUT_POST, "e_telefono1" );
-		$telefono2 = filter_input ( INPUT_POST, "e_telefono2" );
-		$telefono3 = filter_input ( INPUT_POST, "e_telefono3" );
 		$regiones_id = filter_input ( INPUT_POST, "e_regiones_id" );
 		$direccion = filter_input ( INPUT_POST, "e_direccion" );
 		$genero = filter_input ( INPUT_POST, "e_genero" );
-		$fechanac = filter_input ( INPUT_POST, "e_fechanac" );
+		$dianac = filter_input(INPUT_POST,"e_dia_nac");
+        $mesnac = filter_input(INPUT_POST,"e_mes_nac");
+        $agnonac = filter_input(INPUT_POST,"e_agno_nac");
 		if (isset ( $fields )) {
 			echo json_encode ( array (
 					"result" => "error",
@@ -225,40 +233,58 @@ function newUser() {
 			) );
 			exit ();
 		}
-		$usuario->datosUsuario ( $nombres, $apellidos, $telefono1, $telefono2, $telefono3, $regiones_id, $direccion, $genero, $fechanac);
+		$usuario->datosUsuario ( $nombres, $apellidos, $regiones_id, $direccion, $genero, $dianac, $mesnac,$agnonac);
 		$usuario->datosAcceso ( $seudonimo, $email, $password );
 		$usuario->datosStatus ();
 		$valores=array(
 			"nombres"=>$nombres,
 			"apellidos"=>$apellidos,
-			"telefono1"=>$telefono1,
-			"telefono2"=>$telefono2,
-			"telefono3"=>$telefono3,
 			"regiones_id"=>$regiones_id,
 			"direccion"=>$direccion,
 			"genero"=>$genero,
-			"fechanac"=>$fechanac
+			"dia_nac"=>$dianac,
+                        "mes_nac"=>$mesnac,
+                        "agno_nac"=>$agnonac
 		);
-		$nuevo=$bd->query("select id from usuarios order by id desc limit 1");
-		if(empty($nuevo)){
-			$nuevoId=10;
-		}else{
-			foreach($nuevo as $n=>$valor){
-				$nuevoId=$valor["id"]+1;
-			}
-		}
-		$result = $bd->doInsert ( "usuarios",$valores);
+		$bd->doInsert ( "usuarios",$valores);
+        $nuevoId=$bd->lastInsertId();
 		$hash = hash ( "sha256", $password );
-		$result = $bd->doInsert ( "usuariosxstatus",array("fecha"=>strtotime('now'),"status_usuarios_id"=>1,"usuarios_id"=>$nuevoId));
-		$result = $bd->doInsert ( "usuarios_accesos",array("usuarios_id"=>$nuevoId,"password"=>$hash,"email"=>$email,"seudonimo"=>$seudonimo));
+		$bd->doInsert ( "usuariosxstatus",array("fecha"=>strtotime('now'),"status_usuarios_id"=>1,"usuarios_id"=>$nuevoId));
+		$bd->doInsert ( "usuarios_accesos",array("usuarios_id"=>$nuevoId,"password"=>$hash,"email"=>$email,"seudonimo"=>$seudonimo));
 //		$usuario->crearUsuario ($nuevoId);
 //		$usuario->id=$nuevoId;
-		$foto->crearFotoUsuario ( $nuevoId, $_POST ["foto"] );
+		$foto->crearFotoUsuario ( $nuevoId, filter_input(INPUT_POST,"foto"));
 		$usuario->ingresoUsuario ( array (
-				"seudonimo" => filter_input ( INPUT_POST, "seudonimo" ) 
-		), filter_input ( INPUT_POST, "password" ) );
+				"seudonimo" => filter_input(INPUT_POST, "seudonimo" )),
+				filter_input ( INPUT_POST, "password" ) );
 		echo json_encode ( array (
 				"result" => "ok" 
 		) );
 	}
+}
+function actNat() {
+        session_start();
+        $id=filter_input(INPUT_POST,"id");
+        if(!$id){
+                $usuario = new usuario($_SESSION["id"]);
+                $actUsua=$_SESSION["id"];
+        }else{
+                $usuario = new usuario($id);
+                $actUsua=$id;
+        }
+        $bd = new bd ();
+        $values_usu = array(
+                        "nombres" => filter_input ( INPUT_POST,"e_nombres"),
+                        "apellidos" => filter_input ( INPUT_POST,"e_apellidos"),
+                        "genero" => filter_input(INPUT_POST,"e_genero"),
+                        "dia_nac" => filter_input(INPUT_POST,"e_dia_nac"),
+                        "mes_nac" => filter_input(INPUT_POST,"e_mes_nac"),
+                        "agno_nac" => filter_input(INPUT_POST,"e_agno_nac"),
+                        "regiones_id" => filter_input(INPUT_POST,"e_regiones_id"),
+                        "direccion" => filter_input ( INPUT_POST, "e_direccion" ),
+        );
+        $bd->doUpdate ( "usuarios", $values_usu, "id = $actUsua" );
+        echo json_encode ( array (
+                         "result" => "OK"
+                         ) );
 }

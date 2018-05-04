@@ -7,6 +7,7 @@ include_once 'bd.php';
  * @property date fecha;
  * @property int usuarios_id;
  * @property string temas_id;
+ * @property string status;
  */
 class aportes{
 	protected $table="aportes";
@@ -15,12 +16,13 @@ class aportes{
 	private $fecha;
 	private $usuarios_id;
 	private $temas_id;
+    private $status;
 	public function aportes($id = NULL){
 		if(!is_null($id)){
 			$this->buscarAporte($id);
 		}
 	}
-	public function nuevoAporte($params){  //Función que se mejorara a medida que se utilice la clase
+	public function nuevoAporte($params){  //Funcion que se mejorara a medida que se utilice la clase
 		$bd = new bd();
 		$result = $bd->doInsert($this->table, $params);
 		if($result){
@@ -39,6 +41,7 @@ class aportes{
 			$valores["fecha"] = $result["fecha"];
 			$valores["usuarios_id"] = $result["usuarios_id"];
 			$valores["temas_id"] = $result["temas_id"];
+                        $valores["status"] = $result["status"];
 			$this->setAporte($valores);
 			return true;
 		}else {

@@ -1,0 +1,50 @@
+<br>
+<center><h1>CONFIGURACI&Oacute;N</h1></center>
+<div class="contenedor">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pad20">
+            <form class="form-apdp" role="form">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-input" ng-model="employer.nombres" placeholder="nombre(s)" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-input" ng-model="employer.apellidos" placeholder="apellido(s)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-textarea" ng-model="employer.direccion" rows="2" placeholder="direccion" ></textarea>
+                </div>
+                <div class="col-xs-12 col-sm-6">                
+                    <div class="form-group">
+                        <input type="text" class="form-input" ng-model="employer.telefonos" placeholder="Telefonos" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        <input type="email" class="form-input" ng-model="employer.email" placeholder="email" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">                
+                    <div class="form-group">
+                        <input type="password" class="form-input" ng-model="employer.password" placeholder="nueva clave" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">                
+                    <div class="form-group">
+                        <input type="password" class="form-input" ng-model="employer.password2" placeholder="repite la clave"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-textarea" ng-model="employer.observaciones" rows="2" placeholder="hablanos de ti"></textarea>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" ng-click="actualizar()" ng-show="employer.nombres && employer.apellidos && employer.password==employer.password2 && employer.password && employer.telefonos && employer.email">Actualizar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12"><br><br><br></div>
+    </div>
+</div>

@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function(){
-	alert("jsjsj");
+        $("li.menu").removeClass("active");
 	$(document).prop('title', "Perfil de "+$(".texto-perfil-header").html());
 	/* ============================----- Menu principal Perfil -----=========================*/
 	$(".btn-group-justified > .btn-group").click(function(){
@@ -17,10 +17,8 @@ $(document).ready(function(){
 	            type: 'GET',
 	            dataType: 'html',
 	            success: function (data) {	            	
-	            	setTimeout(function(){
-	            		$("#ajaxContainer").html(data);
-	            		loadingAjax();
-	            	}, 100);
+            		$("#ajaxContainer").html(data);
+            		loadingAjax(false);
 	            },
 	            error: function (xhr, status) {
 	            	SweetError(status);
@@ -80,61 +78,63 @@ $(document).ready(function(){
 		$("#btn-megusta").html("...Cargando");	
 		usuario = $(this).data("usr");
 		panas = $(this).data("pana");
+                accion=$(this).data("action");
+                elObjeto=$("#btn-megusta");
 		$.ajax({
-            url: "paginas/perfil/fcn/f_favoritos.php",
-            data: { id : getQuerystringValue("id"), action: $(this).data("action")},
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-            	setTimeout(function(){
+                    url: "paginas/perfil/fcn/f_favoritos.php",
+                    data: { id : getQuerystringValue("id"), action: accion},
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        setTimeout(function(){
             		if(data.result === "OK"){
-            			$("#btn-megusta").prop("disabled",false);
-            			if($("#btn-megusta").data("action") === "like"){
+            			elObjeto.prop("disabled",false);
+            			if(accion === "like"){
             				count++;
-            				$("#btn-megusta").html("<i class='fa fa-thumbs-up'></i> Siguiendo");
-            				$("#btn-megusta").data("action","dislike");
-            				$("#btn-megusta").data("count",count);
+            				elObjeto.html("<i class='fa fa-thumbs-up'></i> Siguiendo");
+            				elObjeto.data("action","dislike");
+            				elObjeto.data("count",count);
             				if(count!=1)
             				var txtS = count+" Seguidores"; 
             				else
             				var txtS = count+" Seguidor";
             				$("#megustan").text(txtS);
-            				$("#btn-megusta").removeClass("btn-default-gusta");
-            				$("#btn-megusta").addClass("btn-default2");
+            				elObjeto.removeClass("btn-default-gusta");
+            				elObjeto.addClass("btn-default2");
             				$.ajax({									// Segundo ajax envia notifiacion al correo del usuario que realizo la pregunta
-								url: "paginas/perfil/fcn/f_perfil.php",
-								data: {metodo:"correoPanas",usr:usuario, pana:panas},
-								type: "POST",
-								dataType: "html",
-								success:function(data){
-								}
-							});						
+						url: "paginas/perfil/fcn/f_perfil.php",
+						data: {metodo:"correoPanas",usr:usuario, pana:panas},
+						type: "POST",
+						dataType: "html",
+						success:function(data){
+                                		}
+					});						
             			}else{
             				count--;
-            				$("#btn-megusta").html("<i class='fa fa-thumbs-up'></i>  Seguir");
-            				$("#btn-megusta").data("action","like");
-            				$("#btn-megusta").data("count",count);
+            				elObjeto.html("<i class='fa fa-thumbs-up'></i>  Seguir");
+            				elObjeto.data("action","like");
+            				elObjeto.data("count",count);
             				if(count!=1)
             				var txtS = count+" Seguidores"; 
             				else
             				var txtS = count+" Seguidor";
             				$("#megustan").text(txtS);
-		       				$("#btn-megusta").removeClass("btn-default2");
-            				$("#btn-megusta").addClass("btn-default-gusta");
+		       				elObjeto.removeClass("btn-default2");
+            				elObjeto.addClass("btn-default-gusta");
             			}            				
             		}else{
-            			$("#btn-megusta").prop("disabled",false);
-            			$("#btn-megusta").html(html + ":Error");	
+            			elObjeto.prop("disabled",false);
+            			elObjeto.html(html + ":Error");	
             		}
-            	}, 1000);	
+            	}, 1000);
             },
             error: function (xhr, status) {
             	SweetError(status);
-            	$("#btn-megusta").prop("disabled",false);
-        		$("#btn-megusta").html(html + ":Error");
+            	elObjeto.prop("disabled",false);
+        		elObjeto.html(html + ":Error");
             }
         });
-	});	
+	});
 	/* ============================----- Actualizar info social -----=========================*/
 	$(document).on('click','#btn-info-social',function() {		
 		$.ajax({			
@@ -157,36 +157,35 @@ $(document).ready(function(){
             }
         });
 	});
-	$(document).on("click","#btn-social-act",function(){
+	$("button#btn-social-act").click(function(){
 		var form = $( "#usr-act-form-social" );
-		var fv = form.data('formValidation');
+//		var fv = form.data('formValidation');
 		var method = "&method=act-social";
 		$.ajax({
 			url: form.attr('action'), // la URL para la petición
-            data: form.serialize() + method, // la información a enviar
-            type: 'POST', // especifica si será una petición POST o GET
-            dataType: 'html', // el tipo de información que se espera de respuesta
-            success: function (data) {
-            	// código a ejecutar si la petición es satisfactoria;
-            	console.log(data);
-	            if (data == 'OK') {
-	            	swal({
-						title: "Exito",
-						text: "Se actualizo correctamente.",
-						imageUrl: "galeria/img/logos/bill-ok.png",
-						timer: 2000,
-						showConfirmButton: true
-						}, function(){							
-							location.reload();
-						});
-	            }
-          	},// código a ejecutar si la petición falla;
-            error: function (xhr, status) {
-            	SweetError(status);
-            }
-        });
-	});
-	
+                        data: form.serialize() + method, // la información a enviar
+                        type: 'POST', // especifica si será una petición POST o GET
+                        dataType: 'html', // el tipo de información que se espera de respuesta
+                        success: function (data) {
+                            // código a ejecutar si la petición es satisfactoria;
+                            console.log(data);
+                            if (data == 'OK') {
+                                swal({
+					title: "Exito",
+					text: "Se actualizo correctamente.",
+					imageUrl: "galeria/img/logos/bill-ok.png",
+					timer: 2000,
+					showConfirmButton: true
+					}, function(){							
+						location.reload();
+					});
+                            }
+                        },// código a ejecutar si la petición falla;
+                        error: function (xhr, status) {
+                            SweetError(status);
+                        }
+                });
+	});	
 	var tipo ="";
 	/* ============================----- Actualizar foro perfil -----=========================*/
 	$(".subir-foto-perfil").click(function(){
@@ -234,62 +233,61 @@ $(document).ready(function(){
 					$('.image-editor').cropit('previewSize',{width:400,height:400 });
 				}
 			};
-			reader.readAsDataURL(file);			
+			reader.readAsDataURL(file);
 		} else {
 			SweetError("Archivo no soportado.");
 		}		
 	});
 
 	$("#save-foto").click(function(){
-        id=$("#img-perfil").data("id");
+                id=$("#img-perfil").data("id");
 		loadingAjax(true);
 		if($("#save-foto").hasClass("save-perfil")){
-		$.ajax({
-			url: "fcn/f_usuarios.php", // la URL para la petición
-            data: {ruta: $("#img-perfil").attr("src") ,foto: $('.image-editor').cropit('export'), method: "fot"}, // la información a enviar
-            type: 'POST', // especifica si será una petición POST o GET
-            dataType: 'json', // el tipo de información que se espera de respuesta
-            success: function (data) {
-            	// código a ejecutar si la petición es satisfactoria;
-            	console.log(data);
-	            if (data.result !== 'error') {
-	            	//location.reload();
-	            	window.open("perfil.php?id=" + id + "&new=1","_self");            	
-	            	loadingAjax(false);
-	            	// $("#img-perfil").attr("src",$('.image-editor').cropit('export'));
-	            	// $("#fotoperfilm").attr("src",$('.image-editor').cropit('export'));
-	            }
-          	},// código a ejecutar si la petición falla;
-            error: function (xhr, status) {
-            	SweetError(status);
-            }
-        });
-      }else{
-       $.ajax({
-			url: "fcn/f_usuarios.php", // la URL para la petición
-            data: {ruta: $("#img-portada").attr("src") ,foto: $('.image-editor').cropit('export'), method: "fotP"}, // la información a enviar
-            type: 'POST', // especifica si será una petición POST o GET
-            dataType: 'json', // el tipo de información que se espera de respuesta
-            success: function (data) {
-            	// código a ejecutar si la petición es satisfactoria;
-            	console.log(data);
-	            if (data.result !== 'error') {
-	            	//location.reload();
-	            	$(".modal-dialog").css("width","400px");	
-	            	$('.image-editor').cropit('previewSize',{width:400,height:400 });
-	            	window.open("perfil.php?id=" + id + "&new=1","_self");
-	            	loadingAjax(false);
-	            	// $("#img-perfil").attr("src",$('.image-editor').cropit('export'));
-	            	// $("#fotoperfilm").attr("src",$('.image-editor').cropit('export'));
-	            }
-          	},// código a ejecutar si la petición falla;
-            error: function (xhr, status) {
-            	SweetError(status);
-            }
-        });
-        }
-	});
-	
+        		$.ajax({
+                		url: "fcn/f_usuarios.php", // la URL para la petición
+                                data: {ruta: $("#img-perfil").attr("src") ,foto: $('.image-editor').cropit('export'), method: "fot"}, // la información a enviar
+                                type: 'POST', // especifica si será una petición POST o GET
+                                dataType: 'json', // el tipo de información que se espera de respuesta
+                                success: function (data) {
+                                    // código a ejecutar si la petición es satisfactoria;
+                                    console.log(data);
+                                    if (data.result !== 'error') {
+                                        //location.reload();
+                                        window.open("perfil.php?id=" + id + "&new=1","_self");            	
+                                        loadingAjax(false);
+                                        // $("#img-perfil").attr("src",$('.image-editor').cropit('export'));
+                                        // $("#fotoperfilm").attr("src",$('.image-editor').cropit('export'));
+                                    }
+                                },// código a ejecutar si la petición falla;
+                                error: function (xhr, status) {
+                                SweetError(status);
+                            }
+                    });
+                }else{
+                    $.ajax({
+                        url: "fcn/f_usuarios.php", // la URL para la petición
+                        data: {ruta: $("#img-portada").attr("src") ,foto: $('.image-editor').cropit('export'), method: "fotP"}, // la información a enviar
+                        type: 'POST', // especifica si será una petición POST o GET
+                        dataType: 'json', // el tipo de información que se espera de respuesta
+                        success: function (data) {
+                            // código a ejecutar si la petición es satisfactoria;
+                            console.log(data);
+                            if (data.result !== 'error') {
+                                //location.reload();
+                                $(".modal-dialog").css("width","400px");	
+                                $('.image-editor').cropit('previewSize',{width:400,height:400 });
+                                window.open("perfil.php?id=" + id + "&new=1","_self");
+                                loadingAjax(false);
+                                // $("#img-perfil").attr("src",$('.image-editor').cropit('export'));
+                                // $("#fotoperfilm").attr("src",$('.image-editor').cropit('export'));
+                            }
+                        },// código a ejecutar si la petición falla;
+                            error: function (xhr, status) {
+                            SweetError(status);
+                        }
+                    });
+                }
+	});	
 	$("#cambiar-foto").click(function(){
 		$("#cropper").modal("hide");
 		$('.cropit-image-input').click();

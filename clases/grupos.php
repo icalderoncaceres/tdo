@@ -14,9 +14,9 @@ class grupos{
 	private $nombre;
 	private $fecha;
 	private $fecha_fin;
-        private $relaciones_id;
-        private $codigos_id;
-        private $usuarios_id;
+    private $relaciones_id;
+    private $codigos_id;
+    private $usuarios_id;
 	public function grupos($id = NULL){
 		if(!is_null($id)){
 			$this->buscarGrupo($id);
@@ -31,7 +31,12 @@ class grupos{
 		if($result){
                         $nuevoId=$bd->lastInsertId();
                         $condicion="id={$row["id"]}";
-                        $result=$bd->doUpdate("codigos", array("grupos_id"=>$nuevoId), $condicion);
+                        $result.=$bd->doUpdate("codigos", array("grupos_id"=>$nuevoId), $condicion);                       
+                        $valores=array("grupos_id"=>$nuevoId,
+                                       "usuarios_id"=>$params["usuarios_id"],
+                                       "roles_id"=>1,
+                                       "fecha"=>date("Y-m-d H:i:s",time()));
+                        $result.=$bd->doInsert("usuarios_grupos",$valores);
                         $this->setGrupo($params);
 			return $this->id;
 		}else{
@@ -128,8 +133,16 @@ class grupos{
 	    $bd=new bd();
 	    $result=$bd->query("select count(usuarios_id) as tota from usuarios_grupos where grupos_id=$id");
 	    $row=$result->fetch();
-	    return $row["tota"] + 1;
+	    return $row["tota"];
 	}
+        public function getMiembros($id=NULL){
+            if(is_null($id)){
+                $id=$this->id;
+            }
+            $bd=new bd();
+            $result=$bd->query("select usuarios_id from usuarios_grupos where grupos_id=$id");
+            return $result;
+        }
 	public function getRelacion($id=NULL){
 	    if(is_null($id)){
 	        $id=$this->id;
@@ -138,4 +151,37 @@ class grupos{
 	    $result=$bd->doSingleSelect("relaciones","id=$this->relaciones_id","descripcion");
 	    return $result["descripcion"];
 	}
+        public function getEntradas($inicio=0,$id=NULL){
+            if(is_null($id)){
+                $id=$this->id;
+            }
+            $bd=new bd();
+            $result=$bd->query("select * from entradas_grupos where grupos_id=$id order by posicion limit 20 OFFSET $inicio");
+            return $result;
+        }
+        public function countEntradas($id=NULL){
+            if(is_null($id)){
+                $id=$this->id;
+            }
+            $bd=new bd();
+            $result=$bd->query("select count(id) as tota from entradas_grupos where grupos_id=$id and activo=1");
+            $row=$result->fetch();
+            return $row["tota"];
+        }        
+        public function getItems($entradas_id,$id=NULL){
+            if(is_null($id)){
+                $id=$this->id;
+            }
+            $bd=new bd();
+            $result=$bd->query("select * from entradas_capitulos where entradas_id=$entradas_id order by posicion");
+            return $result;
+        }
+        public function getCodigo($id=NULL){
+            if(is_null($id)){
+                $id=$this->id;                
+            }
+            $bd=new bd();
+            $result=$bd->doSingleSelect("codigos","grupos_id=$id","codigo");
+            return $result["codigo"];
+        }
 }

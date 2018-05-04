@@ -24,7 +24,7 @@ class temas{
 			$this->buscarTema($id);
 		}
 	}
-	public function nuevoTema($params){  //Función que se mejorara cuando se trabaje en el modulo de registrar temas
+	public function nuevoTema($params){
 		$bd = new bd();
 		$result = $bd->doInsert($this->table, $params);
 		if($result){
@@ -67,8 +67,8 @@ class temas{
 		}
 		$bd=new bd();
 		$strLimite=" limit $limite OFFSET $inicio";
-		$consulta="select aportes.id as id_a,aportes.fecha,aportes.contenido,usuarios.nombres,usuarios.apellidos from aportes,usuarios 
-			   where aportes.temas_id=$id and usuarios_id=usuarios.id order by aportes.fecha desc $strLimite";
+		$consulta="select aportes.id as id_a,aportes.fecha,aportes.contenido,usuarios.id,usuarios.nombres,usuarios.apellidos from aportes,usuarios 
+			   where aportes.temas_id=$id and usuarios_id=usuarios.id and aportes.status=1 order by aportes.fecha desc $strLimite";
 		$result=$bd->query($consulta);
 		if(!empty($result)){
 			return $result;
@@ -81,13 +81,13 @@ class temas{
 		if(is_null($id)){
 			$id=$this->id;
 		}
-		$result=$bd->query("select count(*) as tota from aportes where temas_id=$id");
+		$result=$bd->query("select count(*) as tota from aportes where temas_id=$id and status=1");
 		if($result->rowCount()>0){
 			$row = $result->fetch();
 			return $row["tota"];
 		}else{
 			return 0;
-		}		
+		}
 	}
 	public function agregarAporte($contenido,$id=NULL){
 		if(is_null($id)){
@@ -102,13 +102,14 @@ class temas{
 			       "fecha"=>$tiempo,
 			       "usuarios_id"=>$_SESSION["id"],
 			       "temas_id"=>$id,
+                   "status"=>1
 		);
 		$result=$bd->doInsert("aportes",$valores);
 		return $result;
 	}
 	public function getRuta(){
 		$bd=new bd();
-		$consulta="select temas.titulo,areas.nombre from temas,areas where temas.areas_id=areas.id";
+		$consulta="select temas.titulo,areas.nombre from temas,areas where temas.areas_id=areas.id and temas.id={$this->id}";
 		$result=$bd->query($consulta);
 		if($result->rowCount()>0){
 			$row = $result->fetch();
@@ -123,7 +124,7 @@ class temas{
 		}
 	}
 	public function atributoFormateado($atributo="titulo",$longitud=15){
-		$devolver=(strlen($this->$atributo)<=$longitud?$this->titulo:substr($this->titulo,0,$longitud) . "...");
+		$devolver=(strlen($this->$atributo)<=$longitud?$this->$atributo:substr($this->$atributo,0,$longitud) . "...");
 		return $devolver;
 	}
 }

@@ -29,24 +29,6 @@ class fotos{
 			return "galeria/img/logos/silueta-bill.png";
 		}
 	}
-	public function crearFotoPublicacion($id_publicacion, $dataurl)
-	{
-		$bd = new bd();
-		if(substr ( $dataurl, 0, 4 ) == "data")
-		{
-			$this->ruta = $this->crearRuta();
-			$result = $bd->doInsert($this->table,array("id" => 0, "ruta" => substr($this->ruta, strpos($this->ruta, "/") + 7)));
-			if($result){
-				$this->id = $bd->lastInsertId();
-				$bd->doInsert($this->table_pub, array("publicaciones_id" => $id_publicacion, "fotos_id" => $this->id));
-				$this->subirFoto($dataurl);
-				return true;
-			}else{
-				echo $result;
-				return false;
-			}
-		}
-	}
 	public function actualizarFotoPublicacion($id_publicacion, $dataurl,$id)
 	{
 		if(substr ( $dataurl, 0, 4 ) == "data")
@@ -56,12 +38,24 @@ class fotos{
 			$this->subirFoto($dataurl);
 		}
 	}	
+	public function crearFotoEvento()
+	{
+		$bd = new bd();
+		$this->ruta = "galeria/imagenes/";
+		$result = $bd->doInsert($this->table,array("ruta" => $this->ruta));
+		if($result){
+			$this->id = $bd->lastInsertId();
+			return $this->id;
+		}else{
+			return false;
+		}
+	}        
 	public function crearFotoUsuario($id_usuario, $dataurl){
 		$bd = new bd();		
 		if(substr ( $dataurl, 0, 4 ) == "data")
 		{
 			$this->ruta = $this->crearRuta();
-			$result = $bd->doInsert($this->table,array("id" => 0, "ruta" => substr($this->ruta, strpos($this->ruta, "/") + 1)));
+			$result = $bd->doInsert($this->table,array("ruta" => substr($this->ruta, strpos($this->ruta, "/") + 1)));
 			if($result){
 				$this->id = $bd->lastInsertId();
 				$bd->doInsert($this->table_user, array("status" => "A", "usuarios_id" => $id_usuario, "fotos_id" => $this->id));
@@ -75,15 +69,15 @@ class fotos{
 	}
 	public function subirFoto($dataurl,$ruta = NULL){	
 		//Obtener la dataurl de la imagen
-		$data_url = str_replace(" ", "+", $dataurl);
-		$filteredData=substr($data_url, strpos($data_url, ",")+1);			
+		$data_url = str_replace(" ", "+", $dataurl);                
+		$filteredData=substr($data_url, strpos($data_url, ",")+1);
 		//Decodificar la dataurl
 		$unencodedData=base64_decode($filteredData);
 		//subir la imagen
 		if(is_null($ruta)){
 			$ruta = "{$this->ruta}{$this->id}.png";
 		}else{
-			$ruta = "../$ruta";			
+			$ruta = "../$ruta";
 		}
 		return file_put_contents($ruta, $unencodedData);
 	}

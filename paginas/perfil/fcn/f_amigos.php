@@ -15,7 +15,7 @@ if (! isset ( $_SESSION )) {
 }
 // validamos que el id este seteado, caso contrario regresamos al usuario a otra pagina
 if (isset ( $_GET ["u"] )) :
-		$bd = new bd();
+        $bd = new bd();
 	$table = 'usuarios_accesos';
 	$condicion = 'seudonimo="'.$_GET["u"].'"';
 	$result = $bd->doSingleSelect($table,$condicion,'usuarios_id');

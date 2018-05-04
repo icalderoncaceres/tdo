@@ -38,8 +38,9 @@ $habilitado=!isset($_SESSION["id"])?$habilitado="No":$habilitado="Si";
 				<div class="row pad10">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Titulo:</u></strong> <?php echo $valor["titulo"];?></div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Descripci&oacute;n:</u></strong> <?php echo utf8_encode($valor["des_r"]);?></div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Colaborador:</u></strong> <?php echo " {$valor["nombres"]} {$valor["apellidos"]}";?> </div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Fecha:</u></strong> <?php echo $valor["fecha"];?></div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Dirigio a:</u></strong> <?php echo utf8_encode($valor["scope"]);?></div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Colaborador:</u></strong> <a href="perfil.php?id=<?php echo $valor["id"];?>" target="_blank"><?php echo " {$valor["nombres"]} {$valor["apellidos"]}";?></a></div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Fecha:</u></strong> <?php echo date("d/m/y",strtotime($valor["fecha"]));?></div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Visitas:</u></strong> <span id="totaVisitas<?php echo $valor["id_r"];?>" name="totaVisitas<?php echo $valor["id_r"];?>" data-total="<?php echo $valor["totaVisitas"];?>"><?php echo $valor["totaVisitas"];?></span></div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Formato:</u></strong> <span><?php echo $recurso->getFormato();?></span></div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong><u>Descargas:</u></strong> <span id="totaDescargas<?php echo $valor["id_r"];?>" name="totaDescargas<?php echo $valor["id_r"];?>" data-total="<?php echo $valor["totaDescargas"];?>"><?php echo $valor["totaDescargas"];?></div>
@@ -47,8 +48,8 @@ $habilitado=!isset($_SESSION["id"])?$habilitado="No":$habilitado="Si";
 					<i class="fa fa-thumbs-up calificacion <?php echo $cal1;?>" style="cursor:pointer" data-id='<?php echo $valor["id_r"];?>' data-calificacion="1"></i> <span id="positivos<?php echo $valor["id_r"];?>"><?php echo $valor["totaPositivos"];?></span>
   				        <i class="fa fa-thumbs-down calificacion <?php echo $cal2;?>" style="cursor:pointer" data-id='<?php echo $valor["id_r"];?>' data-calificacion="-1"></i>
 					<span id="negativos<?php echo $valor["id_r"];?>"><?php echo $valor["totaNegativos"];?></span> Total <span id="total<?php echo $valor["id_r"];?>"><?php echo $valor["totaPositivos"] + $valor["totaNegativos"];?></span></div>
-					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="ejecutar.php?ruta=<?php echo $valor["id_r"];?>" target="_blank" class="vistasdescargas" data-id="<?php echo $valor["id_r"]; ?>" data-metodo="ver" data-ruta="<?php echo $valor["ruta"];?>">Probar</a></div>
-					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="#" class="vistasdescargas" data-id="<?php echo $valor["id_r"]; ?>" data-metodo="descargar" data-ruta="<?php echo $valor["ruta"];?>">Descargar</a></div>
+					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="#" class="vistasdescargas" data-id="<?php echo $valor["id_r"]; ?>" data-metodo="ver" data-ruta="<?php echo $valor["ruta"];?>" data-vinculo="<?php echo $valor["vinculo"];?>">Probar</a></div>
+					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="#" class="vistasdescargas" data-id="<?php echo $valor["id_r"]; ?>" data-metodo="descargar" data-ruta="<?php echo $valor["ruta"];?>" data-vinculo="<?php echo $valor["vinculo"];?>">Descargar</a></div>
 					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><a href="#" data-toggle="modal" data-target="#recomendar-evento" class="recomendacion" data-id="<?php echo $valor["id_r"];?>">Recomendar</a></div>
 				</div>
 				<br>

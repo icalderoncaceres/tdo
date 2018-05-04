@@ -6,6 +6,8 @@ include "fcn/incluir-css-js.php";
 <body class="pad-body">
 <?php
 	include "temas/header.php";
+	if(!isset($_SESSION))
+		session_start();
 ?>
 <div style="margin-top: -25px;margin-bottom:10px;"><?php include 'paginas/index/apdp-principal.php'; ?></div>
 <div id="grupo" name="grupo">

@@ -11,9 +11,10 @@ $(document).ready(function(){
 		dataType:"html",
 		success:function(data){
                     $("div#ajaxContainer").html(data);
-                    $('div#editorTema').trumbowyg({
-                    lang : 'es'
-                    });
+//                    $('div#editorTema').trumbowyg({
+//                    lang : 'es'
+//                    });
+
 		}
 	});
     });
@@ -36,52 +37,52 @@ $(document).ready(function(){
 	$("div#ajaxContainer").load($(this).data("pagina"));
     });
     $("button#btnAgregar").click(function(e){
-	e.preventDefault();
-	var id=$("button#btnNuevo").data("id");
-	form=$("#form-reg-aporte").serialize() + "&metodo=guardarAporte&id=" + id;
-	$.ajax({
-		url:"paginas/foros/fcn/f_foros.php",
-		data:form,
-		type:"POST",
-		dataType:"html",
-		success:function(data){
-                    console.log(data);
-                    $.ajax({
-			url:"paginas/foros/p_detalle.php",
-			data:{tema:id},
+		e.preventDefault();
+		var id=$("button#btnNuevo").data("id");
+		form=$("#form-reg-aporte").serialize() + "&metodo=guardarAporte&id=" + id;
+		$.ajax({
+			url:"paginas/foros/fcn/f_foros.php",
+			data:form,
 			type:"POST",
 			dataType:"html",
 			success:function(data){
-				$("div#ajaxContainer").html(data);
+                console.log(data);
+                $.ajax({
+					url:"paginas/foros/p_detalle.php",
+					data:{tema:id},
+					type:"POST",
+					dataType:"html",
+					success:function(data){
+						$("div#ajaxContainer").html(data);
+					}
+                });
+                $("div#reg-aporte").modal('hide');
 			}
-                    });
-                    $("div#reg-aporte").modal('hide');
-		}
-	});
+		});
     });
     $("button#btnAgregarTema").click(function(e){
-	e.preventDefault();
-	var id=$("button#btnNuevoTema").data("id");
-	form=$("#form-reg-tema").serialize() + "&metodo=guardarTema&id=" + id;
-	$.ajax({
-		url:"paginas/foros/fcn/f_foros.php",
-		data:form,
-		type:"POST",
-		dataType:"html",
-		success:function(data){
-                	console.log(data);
-			$.ajax({
-				url:"paginas/foros/p_temas.php",
-				data:{area:id},
-				type:"POST",
-				dataType:"html",
-				success:function(data){
-					$("div#ajaxContainer").html(data);
-				}
-			});
-			$("div#reg-tema").modal('hide');
-		}
-	});
+		e.preventDefault();
+		var id=$("button#btnNuevoTema").data("id");
+		form=$("#form-reg-tema").serialize() + "&metodo=guardarTema&id=" + id;
+		$.ajax({
+			url:"paginas/foros/fcn/f_foros.php",
+			data:form,
+			type:"POST",
+			dataType:"html",
+			success:function(data){
+				console.log(data);
+				$.ajax({
+					url:"paginas/foros/p_temas.php",
+					data:{area:id},
+					type:"POST",
+					dataType:"html",
+					success:function(data){
+						$("div#ajaxContainer").html(data);
+					}
+				});
+				$("div#reg-tema").modal('hide');
+			}
+		});
     });
     $("div#ajaxContainer").on("click","button#btnBuscar",function(){
 	if($("input#txtBusqueda").val()!=""){

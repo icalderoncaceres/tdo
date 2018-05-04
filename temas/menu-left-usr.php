@@ -26,14 +26,14 @@
 			</ul>
 		</li>
 		<li class="">
-			<div class="link"><i class="fa fa-credit-card"></i>Facturación<i class="fa fa-chevron-down"></i></div>
+			<div class="link"><i class="fa fa-credit-card"></i>Facturaci&oacute;n<i class="fa fa-chevron-down"></i></div>
 			<ul class="submenu ">
 				<li><a href="#">Cuentas por pagar</a></li>
 				
 				
 			</ul>
 		</li>
-		<li><div class="link"><i class="fa fa-cogs"></i>Configuracion<i class="fa fa-chevron-down"></i></div>
+		<li><div class="link"><i class="fa fa-cogs"></i>Configuraci&oacute;n<i class="fa fa-chevron-down"></i></div>
 			<ul class="submenu">
 				<li><a href="configuracion.php">Datos Personales</a></li>
 			</ul>

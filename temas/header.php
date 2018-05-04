@@ -15,6 +15,3 @@ if (isset ( $_SESSION ["id"] )) {
 }
 ?>
 </header>
-<?php 
-include"modales/m_contacto.php";
-?>

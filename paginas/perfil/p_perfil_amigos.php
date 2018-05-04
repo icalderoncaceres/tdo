@@ -18,15 +18,15 @@ if (! isset ( $_SESSION )) :
 	session_start ();
 endif;
 // validamos que el id este seteado, caso contrario regresamos al usuario a otra pagina
-if (isset ( $_GET ["u"] )) :
+if (isset ( $_GET ["id"] )) :
 	$bd = new bd();
-	$table = 'usuarios_accesos';
-	$condicion = 'seudonimo="'.$_GET["u"].'"';
-	$result = $bd->doSingleSelect($table,$condicion,'usuarios_id');
-	$id = $result['usuarios_id'];
+//	$table = 'usuarios_accesos';
+//	$condicion = 'seudonimo="'.$_GET["u"].'"';
+//	$result = $bd->doSingleSelect($table,$condicion,'usuarios_id');
+//	$id = $result['usuarios_id'];
+	$id=$_GET['id'];
 	$usuario = new usuario ( $id); // instanciamos la clase usuario(perfil a ver)
 	$estado_id = $usuario->u_estados_id; // obtengo el id del estado para luego mostrar
-	$bd = new bd ();
 endif;
 if (isset ( $_SESSION ["id"] )) :
 	$usuarioActual = new usuario ( $_SESSION ["id"] );

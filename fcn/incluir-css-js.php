@@ -1,9 +1,17 @@
 <head>
 <title>Educacionelinea.com</title>
 <link rel="shortcut icon" href="favicon.ico">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Red social educativa, foros, recursos educativos, articulos, espacio virtual, programa de aprendizaje de ingles y mucho mas">
+<meta name="keyword" content="red social educativa,foros,articulos,aula virtual,aprendizaje,ingles">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<meta http-equiv="Content-Language" content="es-ve"> 
+<meta name="DC.format" content="text/html"> 
+<meta name="DC.language" content="es-VE"> 
+<meta name="geo.region" content="VE-G">
+<meta name="geo.placename" content="San Cristobal"> 
+<meta name="revisit-after" content="7 days"> 
+<meta name="rating" content="General"> 
+<meta name="distribution" content="Global"> 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
@@ -21,4 +29,6 @@
 <script type="text/javascript" src="js/sweetalert.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script defer type="text/javascript" src="js/manager/main.js"></script>
 </head>

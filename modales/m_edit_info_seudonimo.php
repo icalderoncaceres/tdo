@@ -29,10 +29,9 @@
 					</section>	
 				</div>
 				<div class="modal-footer">
-				<button type="submit" class="btn btn-primary2">Actualizar</button>					
+				<button type="submit" class="btn btn-primary2">Actualizar</button>
 				</div>
-			</form>
-			
+			</form>			
 		</div>
 		<!-- /.modal-content -->
 	</div>

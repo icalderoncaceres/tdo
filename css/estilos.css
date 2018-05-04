@@ -548,7 +548,7 @@ select::-webkit-scrollbar-thumb {
 	width: 100%;
 	height: 30px;
 	padding: 4px 12px;
-	font-size: 12px;
+	font-size: 18px;
 	line-height: 1.42857143;
 	color: #999;
 	background-color: #fff;
@@ -569,7 +569,7 @@ select::-webkit-scrollbar-thumb {
 	width: 100%;
 	height: 30px;
 	padding: 4px 12px;
-	font-size: 12px;
+	font-size: 18px;
 	line-height: 1.42857143;
 	color: #999;
 	background-color: #fff;
@@ -589,7 +589,7 @@ select::-webkit-scrollbar-thumb {
 	display: block;
 	width: 100%;
 	padding: 4px 12px;
-	font-size: 12px;
+	font-size: 18px;
 	line-height: 1.42857143;
 	color: #999;
 	background-color: #fff;
@@ -1093,13 +1093,13 @@ float: left ;
 }
 .subir-img-active
 {
-height: 100px ; 
-width: 100px ; 
+height: 60px ; 
+width: 60px ; 
 border: 1px dashed #999 ; 
 float: left ;
  margin-left: 10px ; 
 		background-image: url("../galeria/img/camara.png");
-		background-size: 60px 60px ;
+		background-size: 40px 40px ;
 	 background-repeat: no-repeat ;
 	  background-position: center center ;
 	   cursor: pointer;
@@ -1146,7 +1146,6 @@ opacity: 1;
 
 /* ************ Clases de Iv�n ***************** */
 .vinculos-areas{
-	color: #000;
 	-webkit-transition: all 0.2s ease-out;
 	-moz-transition: all 0.2s ease;
 	-o-transition: all 0.2s ease;
@@ -1159,7 +1158,6 @@ opacity: 1;
 
 
 .vinculos-temas {
-	color: #000;
 	-webkit-transition: all 0.2s ease-out;
 	-moz-transition: all 0.2s ease;
 	-o-transition: all 0.2s ease;
@@ -1175,11 +1173,11 @@ opacity: 1;
 }
 
 .fondo1 div{
-	background:#b6c6d7;
+	background:#DFDFDF;
 }
 
 .fondo1 span{
-	color:#aaa;
+	color:rgba(14, 2, 11, 0.94);
 	font-size:16px;
 	text-decoration: none;
 }
@@ -1192,11 +1190,15 @@ opacity: 1;
 }
 
 .fondo2 span{
-	color:#aaa;
+	color:rgba(14, 2, 11, 0.94);
 	font-size:16px;
 	text-decoration: none;
 }
-
+div.chat{
+        height: 360px;
+        overflow: scroll;
+        overflow-x: hidden;
+}
 .amigos-chat {
 	overflow-y: auto;
 	height : 400px;
@@ -1497,4 +1499,184 @@ opacity: 1;
     height:200px;overflow: scroll; 
     overflow-x: hidden;
     padding-left: 15px;    
+}
+div.imagenes-tipos img{
+    width:100px;
+    height:100px;
+}
+img.imagenes-muro{
+    width:350px;
+    height:350px;
+}
+img.imagenes-usuario{
+    width:40px;
+    height:40px;
+    padding:5px;
+}
+
+#reproductor{
+  width: 100%;
+  margin: 20px auto;
+  padding: 5px;
+  background: #999999;
+  border: 1px solid #666666;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+#botones{
+  float: left;
+  height: 20px;
+  text-align:center;
+}
+div#textos{
+	font-size:38px;
+	text-align:center;
+}
+div#textos-vocabulario{
+	font-size:96px;
+	text-align:center;	
+}
+#lista-audios{
+	font-size:20px;
+	
+}
+ul#lista-audios a.song{
+	color:000;
+}
+ul#lista-audios a.song-escenas{
+	color:000;
+}
+ul#lista-audios a.song-vocabulario{
+	color:000;
+}
+ul#lista-audios a.lesson{
+	color:000;
+}
+#barra{
+  position: relative;
+  float: left;
+  width: 720px;
+  height: 16px;
+  padding: 2px;
+  border: 1px solid #CCCCCC;
+  background: #EEEEEE;
+}
+#progreso{
+  position: absolute;
+  width: 0px;
+  height: 16px;
+  background: rgba(0,0,150,.2);
+}
+div#reproductor>.lista-audios{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height:400px;
+}
+div#reproductor .active{
+	background-color: #0000ff;
+}
+ul#lista-audios .units li{
+	padding-left:8%;
+}
+div#centro-escenas>video,div#centro-kareoke>video{
+	max-width:100%;
+	height:auto;
+}
+div.respuesta-multiple{
+	font-size: 18px;
+}
+div.respuesta-multiple>.enunciado{
+	font-size:22px;
+	color:blue;
+	underline:true;
+}
+section.secciones-ejercicios{
+	height:250%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+div.instrucciones li{
+	font-size:22px;
+	underline:false;
+}
+
+.form-textarea-msj2 {
+	display: block;
+	width: 100%;
+	padding: 15px 45px;
+	font-size: 16px;
+	line-height: 1.42857143;
+	color: #666;
+	border: none;
+	border-radius: 0px;
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+	-webkit-transition: all 0.9s ease-out;
+	-moz-transition: all 0.9s ease;
+	-o-transition: all 0.9s ease;
+	text-align: left;
+	resize: none;
+	height: 55px;
+	
+	
+}
+.form-textarea-msj2-act {
+	display: block;
+	width: 100%;
+	padding: 15px 45px;
+	font-size: 16px;
+	line-height: 1.42857143;
+	color: #666;
+	border: none;
+	border-radius: 0px;
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+	-webkit-transition: all 0.9s ease-out;
+	-moz-transition: all 0.9s ease;
+	-o-transition: all 0.9s ease;
+	text-align: left;
+	resize: none;
+	height: 140px;
+	
+	
+}
+.form-textarea-msj2.preguntas {
+	
+	background: url("http://usedglassprinter.com/wp-content/uploads/2014/06/talk_icon.png") no-repeat ;
+    background-size: 25px 25px;
+	background-position: 10px 12px;
+	background-color: #FFF;
+	
+}
+
+.form-textarea-msj2.preguntas:focus {
+	border:none;
+	outline: 0px;
+	border-radius: 0px;
+	height: 140px;
+	background:#FFFFFF;
+	background: url("http://usedglassprinter.com/wp-content/uploads/2014/06/talk_icon.png") no-repeat ;
+    background-size: 25px 25px;
+	background-position: 10px 12px;
+}
+.form-textarea-msj2-act.preguntas {
+	
+	background: url("http://usedglassprinter.com/wp-content/uploads/2014/06/talk_icon.png") no-repeat ;
+    background-size: 25px 25px;
+	background-position: 10px 12px;
+	
+}
+
+.form-textarea-msj2-act.preguntas:focus {
+	border:none;
+	outline: 0px;
+	border-radius: 0px;
+	height: 140px;
+	
+}
+.form-textarea-msj2:focus {
+	outline: 0px;
+	border: 0;
+	border-radius: 0px;
+	height: 140px;
+	
 }

@@ -13,13 +13,12 @@ class usuario {
 	private $id = 0;
 	private $u_nombres;
 	private $u_apellidos;
-	private $u_telefono1;
-	private $u_telefono2;
-	private $u_telefono3;
 	private $u_regiones_id;
 	private $u_direccion;
 	private $u_genero;
-	private $u_fechanac;
+	private $u_dia_nac;
+    private $u_mes_nac;
+    private $u_agno_nac;
 	private $u_descripcion;
 	private $u_website;
 	private $u_facebook;
@@ -147,7 +146,7 @@ class usuario {
 		$bd = new bd();
 		$result = $bd->doSingleSelect($this->u_table,"id = {$this->id}");
 		if($result){
-			$this->datosUsuario($result["nombres"], $result["apellidos"], $result["telefono1"], $result["telefono2"], $result["telefono3"], $result["regiones_id"], $result["direccion"], $result["genero"], $result["fechanac"], $result["descripcion"], $result["website"], $result["facebook"], $result["twitter"]);
+			$this->datosUsuario($result["nombres"], $result["apellidos"], $result["regiones_id"], $result["direccion"], $result["genero"], $result["dia_nac"],$result["mes_nac"],$result["agno_nac"], $result["descripcion"], $result["website"], $result["facebook"], $result["twitter"]);
 			$this->id = $result["id"];
 		}else {
 			return false;
@@ -180,17 +179,16 @@ class usuario {
 	/* * * * * * * * * * * * * * * * * * *
 	 * =========--- Setters ---========= *
 	 * * * * * * * * * * * * * * * * * * */
-	public function datosUsuario($nombres, $apellidos, $telefono1, $telefono2, $telefono3, $regiones_id, $direccion, $genero, $fechanac,$descripcion=NULL,$website=NULL, $facebook=NULL, $twitter = NULL) {
+	public function datosUsuario($nombres, $apellidos, $regiones_id, $direccion, $genero, $dia_nac, $mes_nac, $agno_nac,$descripcion=NULL,$website=NULL, $facebook=NULL, $twitter = NULL) {
 		$this->nuevoUsuario ();
 		$this->u_nombres = $nombres;
 		$this->u_apellidos = $apellidos;
-		$this->u_telefono1 = $telefono1;
-		$this->u_telefono2 = $telefono2;
-		$this->u_telefono3 = $telefono3;
 		$this->u_regiones_id = $regiones_id;
 		$this->u_direccion = $direccion;
 		$this->u_genero = $genero;
-		$this->u_fechanac = $fechanac;
+		$this->u_dia_nac = $dia_nac;
+        $this->u_mes_nac = $mes_nac;
+        $this->u_agno_nac = $agno_nac;
 		$this->u_descripcion = $descripcion;
 		$this->u_website = $website;
 		$this->u_facebook = $facebook;
@@ -230,12 +228,12 @@ class usuario {
 		if(!empty($resultado)){
 			return utf8_encode($resultado["nombre"]);
 		}else{
-			throw new Exception("No se encontro informaci�n de la regi�n", 1);
+			throw new Exception("No se encontro información de la región", 1);
 			return false;
 		}
 	}
 	public function getTiempo(){
-		$bd=new bd();		
+		$bd=new bd();
 		$condicion="usuarios_id={$this->id}";
 		$resultado=$bd->doSingleSelect("usuariosxstatus",$condicion,"fecha");				
 		if(!empty($resultado)){
@@ -258,14 +256,14 @@ class usuario {
 				}else{
 					$agnos=round($meses / 12,0,PHP_ROUND_HALF_DOWN);
 					if($agnos==1){
-						return $agnos . " A�o ";
+						return $agnos . " Año ";
 					}else{
-						return $agnos . " A�os ";
+						return $agnos . " Años ";
 					}
 				}
 			}
 		}else{
-			throw new Exception("No se encontro desde cuando publica este usuario", 1);
+			throw new Exception("No se encontro desde cuando este usuario comparte con nosotros", 1);
 			return false;		
 		}
 		/*
@@ -281,14 +279,14 @@ class usuario {
 		}
 		 */		 
 	}
-        public function getGrupos($id=NULL){
-            if(is_null($id))
-                $id=$this->id;
-            $bd=new bd();
-            $result=$bd->query("select id from grupos where usuarios_id=$id or id in 
-                              (select grupos_id from usuarios_grupos where usuarios_id=$id)");
-            return $result;
-        }        
+    public function getGrupos($id=NULL){
+        if(is_null($id))
+            $id=$this->id;
+        $bd=new bd();
+        $result=$bd->query("select id from grupos where usuarios_id=$id or id in 
+                          (select grupos_id from usuarios_grupos where usuarios_id=$id)");
+        return $result;
+    }        
 	public function getNombre($formateado=0,$longitud=17){
 		$nombre="{$this->u_nombres} {$this->u_apellidos}";
 		if($formateado==0){
@@ -313,5 +311,42 @@ class usuario {
 		}else{
 			return false;
 		}
+	}
+    public function getPais(){
+        $bd=new bd();
+        $row=$bd->doSingleSelect("regiones","id=$this->u_regiones_id","paises_id");
+        return $row["paises_id"];
+    }
+    public function getRecursos($id=NULL){
+        if(is_null($id)){
+            $id=$this->id;
+        }
+        $bd=new bd();
+        $result=$bd->doFullSelect("recursos","usuarios_id=$id","id");
+        return $result;
+    }
+	public function getStatusReservacion($id=NULL){
+		if(is_null($id)){
+			$id=$this->id;
+		}
+		$bd=new bd();
+		$result=$bd->doSingleSelect("reservaciones","usuarios_id=$id order by id desc limit 1");
+		if($result){
+			return $result["status"];
+		}else{
+			return -1;
+		}
+	}
+	public function getLeccion($id=NULL){
+		if(is_null($id)){
+			$id=$this->id;
+		}
+		$bd=new bd();
+		$result=$bd->query("select leccion from avances where reservaciones_id in (select id from reservaciones where usuarios_id=$id) and status=1");
+		$result=$result->fetch();
+		return $result["leccion"];
+	}
+	public function hasChildren($id=NULL){
+		return true;
 	}
 }

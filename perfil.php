@@ -1,5 +1,5 @@
 <?php
-if (!isset ( $_GET ["u"] )) {
+if (!isset ( $_GET ["id"] )) {
 	header ( "Location: index.php" );
 }
 // Incluimos las clases a usar.
@@ -32,23 +32,14 @@ if(isset($_GET["new"])){
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
 			id="ajaxContainer">			
-			<?php
-				if(!isset($_GET["t"])){
-					if($_SESSION["seudonimo"]==$_GET["u"])
-					//include "paginas/perfil/p_newsfeed.php";	
-					//else
-					include "paginas/perfil/p_perfil_listado.php";
-				}else{
-					include "paginas/perfil/p_perfil_amigos2.php";
-				} 
-			?>	
+			<?php include "paginas/perfil/p_perfil_informacion.php";?>	
 		</div>
 	</div>
 <?php include "temas/footer.php";?>
 <?php include 'modales/m_cropper.php';?>
 <?php include 'modales/m_info_social.php';?>
 <div class="modal-backdrop fade in cargador" style="display:none"></div>
-</body>
-<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
 <script type="text/javascript" src="js/perfil.js" async></script>
+<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
+</body>
 </html>

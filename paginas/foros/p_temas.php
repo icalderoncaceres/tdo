@@ -70,8 +70,9 @@ $habilitado=isset($_SESSION["id"])?$habilitado="":"disabled";
 					<div class="temas vinculos-temas <?php echo $fondo;?>" data-titulo="<?php echo $valor["titulo"];?>" data-tema="<?php echo $valor["id_t"]?>">
 						<a style="cursor:pointer" >
 						<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10"><span><?php echo utf8_encode($valor["titulo"]);?></span></div>
+						<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10"><span><?php echo substr(utf8_encode($valor["detalle"]),0,100);?></span></div>
 						<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2"><span><?php echo $valor["totaVisitas"];?> Visitas</span></div>
-						<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo "{$valor["nombres"]} {$valor["apellidos"]} " . $valor["fecha"];?></span></div>
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="perfil.php?id=<?php echo $valor["id"];?>" target="_blank"><?php echo "{$valor["nombres"]} {$valor["apellidos"]}"?></a> <?php echo date("d/m/y H:i:s",strtotime($valor["fecha"]));?></span></div>
 						<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2"><span><?php echo $valor["totaRespuestas"];?> Aportes</span></div>
 						</a>
 					</div>

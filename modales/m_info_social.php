@@ -9,7 +9,7 @@
 				</button>
 				<h3 class="modal-title " >
 					<img src="galeria/img/logos/mascota.png" width="50" height="51"><span 
-						class="marL15">Editar Información Social</span>
+						class="marL15">Editar Informaci&oacute;n Social</span>
 				</h3>
 			</div>
 			<form id="usr-act-form-social" action="fcn/f_usuarios.php" method="post" class="form-inline">
@@ -57,4 +57,3 @@
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
-</div>

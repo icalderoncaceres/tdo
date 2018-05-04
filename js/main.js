@@ -27,9 +27,9 @@ $(function() {
 /*FUNCIONES*/
 function SweetError(text){
 	swal({
-		title: "Error mi pana", 
-		text: "Codigo:"+  text,
-		imageUrl: "galeria/img/logos/bill-error.png",
+		title: "Error inesperado", 
+		text: "Codigo: 404",
+		imageUrl: "galeria/img/logos/error.png",
 		showConfirmButton: true
 		});
 }

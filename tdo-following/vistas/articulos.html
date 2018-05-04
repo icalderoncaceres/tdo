@@ -1,0 +1,43 @@
+<br><br>
+<center><h1>ART&Iacute;CULOS EDUCATIVOS</h1></center>
+<div class="contenedor">
+    <br>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="col-xs-12 col-sm-4">
+                <input class="form-input" type="text" placeholder="titulo" ng-model="titulo" />
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <input class="form-input" type="text" placeholder="descripcion" ng-model="descripcion" />
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <input class="form-input" type="text" placeholder="ruta o vinculo" ng-model="ruta" />
+            </div>             
+        </div>        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pad20">
+            <div class="col-xs-12 col-sm-11 text-center">
+                <span class="t18">P&aacute;ginas</span> <select class="t18"><option ng-repeat="pagina in paginas" ng-click="cambiarPagina(pagina)">{{pagina}}</option></select>
+            </div>            
+            <div class="col-xs-12 col-sm-1 text-center">
+                <button class="btn btn-primary" ng-click="agregar()" ng-show="titulo && descripcion && ruta">Agregar</button>
+            </div>            
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <span class="t26 blue">Titulo - ruta</span>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 text-center">
+                <span class="t26 blue">Activo</span>
+            </div>
+            <div class="hidden-xs col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-12" data-ng-repeat="articulo in articulos" data-ng-class-odd="fondo1" data-ng-class-even="fondo2">
+                <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <span>{{articulo.titulo}}</span> &nbsp;<a href="{{articulo.ruta}}" target="_blank" ><span class="t16">{{articulo.ruta}}</span></a>
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 text-center">
+                    <input type="checkbox" data-ng-checked="articulo.status==1" ng-click="cambiarStatus(articulo.id,articulo.status)" ng-model="articulo.status"/>
+                </div>
+                <div class="hidden-xs col-sm-1 col-md-1 col-lg-1"></div>
+            </div>
+        </div>
+        <div class="col-xs-12"><br><br><br></div>
+    </div>
+</div>
